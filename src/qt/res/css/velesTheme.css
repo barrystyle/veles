@@ -1,0 +1,961 @@
+/******************************************************************************/
+/******************************************************************************/
+/*
+ * The Veles Core Qt GUI Veles Theme stylesheet.
+ *
+ * Copyright (c) 2018-2019 The Veles Core developers
+ *
+ * Distributed under the MIT software license, see the accompanying
+ * file COPYING or http://www.opensource.org/licenses/mit-license.php.
+ */
+/******************************************************************************/
+/************************** Global Color Codes ********************************/
+/******************************************************************************/
+
+/* backround-color:             rgba(31, 31, 31, 1)    #262626                */
+
+/* alternative-backgroud-color: rgba(85, 85, 85, 1)    #262626                */
+
+/* veles-orange;                rgba(241, 155, 126, 1) #f19b7e                */
+
+/* veles-brown:                 rgba(228, 185, 156, 1) #e4b99c                */
+
+/* border-color:                rgba(17, 17, 17, 1)                           */
+
+/******************************************************************************/
+/*****************************  @mdfkbtc **************************************/
+/******************************************************************************/
+
+WalletFrame {
+	margin: 10px 20px 10px 20px;
+	background-color: transparent;
+	background: transparent;
+}
+
+QMainWindow {
+	background-image: url(':/images/velesTheme/bg-pattern');
+	color:#fff;
+	background-color: #c4bebe;
+}
+
+QLabel {
+	background-color: transparent;
+	color: #fff;
+}
+
+QLabel#whiteTitle {
+	background-color: transparent!important;
+	background: transparent;
+	border: 0px;
+}
+
+QLabel#greyTitle {
+	background-color: transparent!important;
+	background: transparent;
+	border: 0px;
+	color: #bbb;
+}
+
+QLineEdit {
+	background-color: rgba(85, 85, 85, 0.5);
+	color: #fff;
+	border: 1px solid rgba(17, 17, 17, 0.5);
+	border-radius: 3px;
+	min-height: 25px;
+}
+
+.QValidatedLineEdit,
+.QLineEdit,
+.QTextEdit {
+    /* Text Entry Fields */
+    font-size: 12px;
+    min-height: 25px;
+    outline: 0;
+    padding: 3px;
+}
+
+.QValidatedLineEdit:!focus {
+    background-color: rgba(85, 85, 85, 0.6);
+}
+
+.QLineEdit:!focus {
+    background-color: rgba(85, 85, 85, 0.6);
+}
+
+.QTextEdit:!focus {
+    background-color: rgba(85, 85, 85, 0.6);
+}
+
+/***************** Double buttons(etc for setting fee value) ******************/
+
+QAbstractSpinBox {
+    padding: 3px 5px 3px 5px;
+    font-size: 12px;
+    min-height: 24px;
+    outline: 0;
+    padding: 3px;
+		color: white;
+    border: 1px solid rgba(17, 17, 17, 0.5);
+    background-color: rgba(85, 85, 85, 0.6);
+}
+
+QAbstractSpinBox:!focus {
+    background-color: rgba(85, 85, 85, 0.7);
+}
+
+QAbstractSpinBox::up-button {
+    width: 12px;
+    background-color: #323232;
+    padding-right: 1px;
+    padding-left: 5px;
+    padding-top: 2px;
+		border-left: 1px solid rgba(17, 17, 17, 0.5);
+		/*border-top: 2px solid rgba(228, 185, 156, 0.7);*/
+}
+
+QAbstractSpinBox::up-button:hover {
+		/*border-top: 2px solid #f19b7e;*/
+		background-color: #555;
+}
+
+QAbstractSpinBox::up-arrow {
+		max-height: 15px;
+		margin-bottom: 1px;
+		margin-right: 3px;
+    image: url(':/icons/velesTheme/smallUpArrow') 0 0 0 0 stretch stretch;
+}
+
+QAbstractSpinBox::down-button {
+    width: 12px;
+    background-color: #323232;
+    padding-right: 1px;
+		padding-left: 5px;
+    padding-bottom: 2px;
+		border-top: 1px solid rgba(17, 17, 17, 0.5);
+		border-left: 1px solid rgba(17, 17, 17, 0.5);
+		/*border-bottom: 2px solid rgba(228, 185, 156, 0.7);*/
+}
+
+QAbstractSpinBox::down-button:hover {
+		/*border-bottom: 2px solid #f19b7e;*/
+		background-color: #555;
+}
+
+QAbstractSpinBox::down-arrow {
+		max-height: 15px;
+		margin-right: 3px;
+		margin-top: 1px;
+    image: url(':/icons/velesTheme/smallDownArrow') 0 0 0 0 stretch stretch;
+}
+
+
+/******** Combo Box (Dropdown buttons for changing VLS mVLS etc..) ************/
+
+QComboBox {
+    /* Dropdown Menus */
+    background: rgba(85, 85, 85, 0.6);
+		border: 1px solid rgba(17, 17, 17, 0.5);
+		height: 23px;
+		margin-left: 3px;
+		padding-left: 3px;
+		margin-right: 5px;
+}
+
+QComboBox:checked {
+    background: #555;
+}
+
+QComboBox:editable {
+    background: rgba(85, 85, 85, 0.6);
+    color: #d6d6d6;
+    border: 1px solid rgba(17, 17, 17, 0.5);
+}
+
+QComboBox::drop-down {
+    width: 12px;
+    border: 0px;
+		border-radius: 1px;
+    background-color: #323232;
+		border-left: 1px solid rgba(17, 17, 17, 0.5);
+		/*border-bottom: 2px solid rgba(228, 185, 156, 0.7);*/
+}
+
+QComboBox::drop-down:hover {
+		/*border-bottom: 2px solid #f19b7e;*/
+		background-color: #555;
+}
+
+QComboBox::down-arrow {
+    border-image: url(':/icons/velesTheme/smallDownArrow') 0 0 0 0 stretch stretch;
+}
+
+QComboBox QListView {
+    background-color: #555;
+    border: 1px solid rgba(17, 17, 17, 0.7);
+    padding: 2px;
+    color: #eee;
+}
+
+QComboBox QAbstractItemView::item {
+    margin: 4px;
+}
+
+QComboBox::item {
+    color: #eee;
+}
+
+QComboBox::item:alternate {
+    background-color: #373737;
+}
+
+QComboBox::item:selected {
+	padding: 2px;
+	background-color: rgba(37, 37, 37, 0.4);
+	color: #fff;
+	font-weight:bold;
+	/*border-top: 1px solid rgba(17, 17, 17, 0.7);
+	border-bottom: 1px solid rgba(17, 17, 17, 0.7);*/
+	/*border-left: 2px solid #F19B7E;*/
+}
+
+QComboBox::indicator {
+    background-color: transparent;
+    selection-background-color: transparent;
+    color: transparent;
+    selection-color: transparent;
+}
+
+/***************************** Checkboxes *************************************/
+
+QCheckBox {
+	background-color: transparent;
+	color: white;
+}
+
+QCheckBox::indicator {
+	border: 1px solid rgba(17, 17, 17, 0.5);
+	background-color: transparent;
+	color: white;
+	border-radius: 50px;
+}
+
+QCheckBox::indicator:unchecked {
+	background-color: #444;
+}
+
+QCheckBox::indicator:unchecked:hover {
+	background-color: rgba(241, 155, 126, 0.7);
+}
+/*
+QCheckBox::indicator:unchecked:pressed {
+
+}
+*/
+QCheckBox::indicator:checked {
+	color: white;
+	background-color: rgba(228, 185, 156, 0.7);
+	border: 1px solid rgba(17, 17, 17, 0.5);
+}
+/*
+QCheckBox::indicator:checked:hover {
+	background-color: black;
+}
+*/
+QCheckBox::indicator:checked:pressed {
+	color: white;
+	background-color: rgba(241, 155, 126, 0.7);
+	border: 1px solid rgba(17, 17, 17, 0.5);
+}
+
+/******************************** Tables **************************************/
+
+QHeaderView {
+    /* Table Header */
+    background-color: transparent;
+    outline: 0;
+}
+
+QHeaderView::section {
+    /* Table Header Sections */
+    qproperty-alignment: center;
+    background-color: #444;
+    min-height: 25px;
+		font-weight: bold;
+    font-size: 12px;
+    border: 0;
+    padding-left: 3px;
+    padding-right: 3px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+		color: white;
+		border-right: 1px solid rgba(17, 17, 17, 0.5);
+		border-bottom: 2px solid rgba(228, 185, 156, 0.5);
+}
+/*
+QHeaderView::section:hover {
+		border-bottom: 2px solid rgba(241, 155, 126, 0.7);
+}
+*/
+QHeaderView::down-arrow {
+    image: url(':/icons/velesTheme/smallDownArrow');
+}
+
+QHeaderView::up-arrow {
+    image: url(':/icons/velesTheme/smallUpArrow');
+}
+
+QHeaderView::section:last {
+    border-right: 0;
+}
+
+.QScrollArea {
+    background: transparent;
+    border: 0;
+}
+
+.QTableView {
+    background: rgba(85, 85, 85, 0.5);
+    border: 1px solid rgba(17, 17, 17, 0.7);
+		border-radius: 3px;
+}
+
+QTableView::item {
+    /* Table Item */
+		background: rgba(85, 85, 85, 0.8);
+    font-size: 12px;
+		border: 0px;
+    color: #f2f2f2;
+}
+
+QTableView::item:selected {
+    /* Table Item Selected */
+    background-color: #464646;
+		/*border-top: 1px solid rgba(228, 185, 156, 0.7);
+		border-bottom: 1px solid rgba(228, 185, 156, 0.7);*/
+    color: #F19B7E;
+}
+
+QTableWidget {
+    /* Table Background */
+    alternate-background-color: #555;
+    border: 0px solid #d6d6d6;
+}
+
+QTableWidget:focus,
+QTableView,
+QTableView:focus {
+    /* Remove focus outline */
+    outline: 0;
+    background: transparent;
+}
+
+QWidget {
+    selection-background-color: #F19B7E;
+    /* Object highlight color */
+    selection-color: #333;
+    outline: 0;
+    /* Remove Annoying Focus Rectangle */
+}
+
+/********************* Main horisontal toolbar with buttons *******************/
+
+QToolBar {
+	background-color: black;
+	border-bottom: 2px solid #1b1810;
+	padding: 5px 0px 0px;
+}
+
+QToolBar > QToolButton {
+	background-color: transparent;
+	color: #ddd;
+	border:0px solid #333;
+	min-height:2.5em;
+	padding: 0em 1em;
+	font-weight:bold;
+	margin-top: 5px;
+	border-bottom: 2px solid transparent;
+}
+
+QToolBar > QToolButton:hover {
+	background-color: rgba(100, 100, 100, 0.3);
+	color: #fff;
+	font-weight:bold;
+	border-bottom: 2px solid #F19B7E;
+}
+
+QToolBar > QToolButton:checked {
+	background-color: transparent;
+	color: #fff;
+	font-weight:bold;
+	border-bottom: 2px solid #e4b99c;
+}
+
+/************************** Menu on the top ***********************************/
+
+QMenuBar {
+	/* Top menu bar */
+	background-color: black;
+	color: #eee;
+	padding-bottom: 2px;
+}
+
+QMenuBar::item {
+
+	background-color:transparent;
+}
+
+QMenuBar::item:selected {
+	background-color: rgba(100, 100, 100, 0.3);
+	color: #eee;
+	font-weight:bold;
+	/*border-top: 2px solid #F19B7E;*/
+}
+
+QMenu {
+	color: #eee;
+  background-color: rgba(31, 31, 31, 1);
+}
+
+QMenu::item {
+	background: transparent;
+}
+
+QMenu::item:disabled {
+	color: grey;
+}
+
+QMenu::item:selected {
+	background-color: rgba(100, 100, 100, 0.3);
+	color: #fff;
+}
+
+/************************ Bootstrap style button, default *********************/
+
+QPushButton {
+	color: #EEE;
+	background-color: #444;
+	border: 1px solid rgba(17, 17, 17, 0.5);
+	border-radius: 0px;
+	padding: 6px 12px;
+	min-width: 80px;
+	min-height: 20px;
+	/* hide icons */
+	qproperty-icon: url(" ");
+}
+
+QPushButton:hover {
+	background-color: rgba(85, 85, 85, 0.9);
+	border: 1px solid rgba(17, 17, 17, 0.5);
+}
+
+QPushButton:pressed {
+	background-color: #555;
+}
+
+
+/* Green button */
+QPushButton#okButton,
+QPushButton#sendButton {
+	color: #EEE;
+	background-color: rgba(92, 184, 92, 0.7);
+	border: 1px solid rgba(17, 17, 17, 0.8);
+}
+
+QPushButton#okButton:hover,
+QPushButton#sendButton:hover {
+	background-color: rgba(76, 174, 76, 0.7);
+	border: 1px solid rgba(17, 17, 17, 0.8);
+}
+
+QPushButton#okButton:pressed,
+QPushButton#sendButon:pressed {
+	background-color: rgba(60, 152, 60, 0.7);
+}
+
+/* Red button */
+QPushButton#cancelButton,
+QPushButton#removeRequestButton,
+QPushButton#clearButton {
+	color: #EEE;
+	background-color: rgba(217, 83, 79, 0.7);
+	border: 1px solid rgba(17, 17, 17, 0.8);
+}
+
+QPushButton#cancelButton:hover,
+QPushButton#removeRequestButton:hover,
+QPushButton#clearButton:hover {
+	background-color: rgba(201, 67, 63, 0.7);
+	border: 1px solid rgba(17, 17, 17, 0.8);
+}
+
+QPushButton#cancelButton:pressed,
+QPushButton#removeRequestButton:pressed,
+QPushButton#clearButton:pressed {
+	background-color: rgba(185, 51, 47, 0.7);
+}
+
+/* Orange button */
+QPushButton#resetButton,
+QPushButton#clearButton {
+	color: #EEE;
+	background-color: rgba(240, 173, 78, 0.7);
+	border: 1px solid rgba(17, 17, 17, 0.8);
+}
+
+QPushButton#resetButton:hover,
+QPushButton#clearButton:hover {
+	background-color: rgba(238, 162, 54, 0.7);
+	border: 1px solid rgba(17, 17, 17, 0.8);
+}
+
+QPushButton#resetButton:pressed,
+QPushButton#clearButton:pressed {
+	background-color: rgba(222, 146, 38, 0.7);
+}
+
+/* Special-style buttons */
+QPushButton#openBitcoinConfButton {
+	width: 200px;
+}
+
+QPushButton#warningIcon,
+QPushButton#labelTransactionsStatus,
+QPushButton#labelWalletStatus {
+	qproperty-icon: url(":/icons/velesTheme/warning");
+	background-color: transparent;
+	border: none;
+}
+
+/* Transparent, fake buttons */
+QWidget#OverviewPage .QPushButton {
+	background-color: transparent;
+	border: none;
+}
+
+QObject#listTransactions {
+	color:white;
+}
+
+QPushButton#labelTransactionsStatus {
+	background-color: transparent;
+	border: none;
+}
+
+/******************************* Dialog Boxes *********************************/
+
+QDialog {
+	background-image: url(':/images/velesTheme/bg-pattern');
+	background-color: #c4bebe;
+}
+
+AskPassphraseDialog {
+    background-color: #262626;
+}
+
+QDialog .QTabWidget::pane {
+    border: 1px solid #262626;
+}
+
+QDialog .QTabWidget .QWidget {
+    background-color: rgba(31, 31, 31, 0.5);
+    color: #d6d6d6;
+}
+
+QTabBar::tab {
+		background-color: rgba(30, 30, 30, 1);
+		padding:0 5px 0 5px;
+		margin-right: 1px;
+    color: #fff;
+		border-top: 1px solid #262626;
+		border-left: 1px solid #262626;
+		border-right: 1px solid #262626;
+		height: 30px;
+		min-width: 60px;
+}
+
+QTabBar::tab::selected{
+	background-color: rgba(30, 30, 30, 0.5);
+}
+
+QTabBar::tab:hover:!selected {
+  background-color: rgba(85, 85, 85, 0.5);
+}
+
+/******************************* Overview Page ********************************/
+
+QWidget#OverviewPage > QWidget {
+	background-color: rgba(30, 30, 30,  0.5);
+	border: 1px solid rgba(17, 17, 17, 0.5);
+	border-radius: 3px;
+}
+
+QObject#line {
+	outline: 0;
+	background-color: rgba(241, 155, 126, 0.5);
+}
+
+/******************************** Send Page ***********************************/
+
+QWidget#SendCoinsDialog > QFrame {
+	background-color: rgba(30, 30, 30,  0.5);
+	border-radius: 3px;
+	border: 1px solid rgba(17, 17, 17, 0.5);
+}
+
+QObject#addressBookButton {
+	background-color: #323232;
+	height: 25px;
+	border: 1px solid rgba(17, 17, 17, 0.5);
+}
+
+QObject#addressBookButton:hover {
+	background-color: #555;
+}
+
+QObject#pasteButton {
+	background-color: #323232;
+	height: 25px;
+	border: 1px solid rgba(17, 17, 17, 0.5);
+}
+
+QObject#pasteButton:hover {
+	background-color: #555;
+}
+
+QObject#deleteButton {
+	background-color: #323232;
+	height: 25px;
+	border: 1px solid rgba(17, 17, 17, 0.5);
+}
+
+QObject#deleteButton:hover {
+	background-color: #555;
+}
+
+QObject#buttonMinimizeFee {
+	margin-top: 2px;
+	margin-right: 2px;
+}
+
+QWidget#SendCoinsDialog > QLabel {
+	background-color: transparent;
+	border: 0px;
+}
+
+QDialog#SendCoinsDialog QLabel#labelBalance {
+    margin-left: 0px;
+    padding-left: 0px;
+		font: 13px;
+    color: rgba(241, 155, 126, 0.7);
+    min-height: 27px;
+}
+
+QDialog#SendCoinsDialog .QScrollArea#scrollArea .QWidget#scrollAreaWidgetContents {
+    /* Send To Widget */
+    background-color: #373737;
+		padding-bottom: 5px;
+}
+
+QDialog#CoinControlDialog > QFrame#frame {
+	background-color: transparent;
+	border: 0px;
+}
+
+QDialog#CoinControlDialog .CoinControlTreeWidget#treeWidget {
+    /* Coin Control Widget Container */
+		background: rgba(85, 85, 85, 0.5);
+    border: 1px solid rgba(17, 17, 17, 0.7);
+		border-radius: 3px;
+}
+
+QDialog#CoinControlDialog .CoinControlTreeWidget#treeWidget::item {
+	/* Table Item */
+	background: rgba(85, 85, 85, 0.8);
+	font-size: 12px;
+	/*border-bottom:	1px solid rgba(17, 17, 17, 0.7);*/
+	color: #f2f2f2;
+}
+
+QDialog#CoinControlDialog .CoinControlTreeWidget#treeWidget::item:selected {
+	/* Table Item Selected */
+	background-color: #464646;
+	/*border-top: 1px solid rgba(228, 185, 156, 0.7);
+	border-bottom: 1px solid rgba(228, 185, 156, 0.7);*/
+	color: #F19B7E;
+}
+
+QDialog#CoinControlDialog .CoinControlTreeWidget#treeWidget::item:checked {
+    /* Coin Control Item (checked) */
+    background-color: #464646;
+    color: #F19B7E;
+}
+/******************************* Help Dialog **********************************/
+
+QObject#HelpMessageDialog *{
+	color: #eee;
+	border-radius: 3px;
+}
+
+QDialog#HelpMessageDialog > QScrollArea * {
+    background-color: transparent;
+		color: #eee;
+}
+
+QObject#HelpMessageDialog > QFrame {
+	background-color: transparent;
+	border: 0px;
+	padding: 20px;
+}
+/************************** Options Dialog ************************************/
+
+QObject#groupBox {
+	color: white;
+}
+
+/************************ Sign Verify Message *********************************/
+
+QObject#messageIn_SM {
+	background-color: rgba(85, 85, 85, 0.5);
+	border-radius: 3px;
+}
+
+QObject#messageIn_VM {
+	background-color: rgba(85, 85, 85, 0.5);
+	border-radius: 3px;
+}
+
+/*****************************Recieve Page*************************************/
+
+QObject#ReceiveCoinsDialog > QWidget#frame2, QWidget#frame {
+	background-color: rgba(30, 30, 30,  0.5);
+	border: 1px solid rgba(17, 17, 17, 0.5);
+	border-radius: 3px;
+}
+
+QObject#outUri {
+	color: white;
+}
+/*************************** Masternode page **********************************/
+
+QWidget#tabWidget {
+	outline: 0;
+	background-color: #282828;
+	border: 1px solid rgba(17, 17, 17, 0.5);
+	border-radius: 5px;
+}
+
+QObject#tableWidgetMyMasternodes {
+	border-radius: 3px;
+	border: 1px solid rgba(17, 17, 17, 0.7);
+	background-color: rgba(85, 85, 85, 0.5);
+}
+/*
+QObject#tableWidgetMyMasternodes > .QTableView {
+    background: rgba(85, 85, 85, 0.5);
+    border: 1px solid rgba(17, 17, 17, 0.7);
+		border-radius: 3px;
+}
+*/
+QObject#tableWidgetMasternodes {
+ background-color: rgba(85, 85, 85, 0.5);
+ border-radius: 3px;
+ border: 1px solid rgba(17, 17, 17, 0.7);
+}
+
+/************** Syncing Status Modal (poping at start wallet) *****************/
+
+QObject#contentWidget {
+	background-color: rgba(30, 30, 30, 0.9);
+	border-radius: 3px;
+	border: 1px solid  rgba(17, 17, 17, 0.5);
+}
+
+QObject#contentWidget > QLabel {
+	color: #ffffff;
+}
+
+/*********************** Status bar and proggress bar *************************/
+
+QStatusBar * {
+    background-color: transparent;
+    color: #fff;
+}
+
+QStatusBar {
+    background-color: black;
+    color: #fff;
+}
+
+QStatusBar QLabel {
+		background-color: transparent;
+    margin-left: 10px;
+    color: #fff;
+}
+
+QProgressBar {
+	background-color: transparent;
+	color: #fff;
+	border: 1px solid #262626;
+    border-radius: 3px;
+}
+
+QProgressBar::chunk {
+	background: rgba(92, 184, 92, 0.7);
+	color: #fff;
+	border: 1px solid rgba(0, 0, 0, .15);
+	border-top-color: rgba(255, 255, 255, .15);
+    border-radius: 3px;
+}
+
+/****************************** Tooltips **************************************/
+
+QToolTip {
+    background-color: #131313;
+    color: #fff;
+    padding: 5px;
+		border: 1px solid #322c1e;
+}
+
+/****************************** Scroll Bar ************************************/
+
+QScrollBar {
+	background-color: black;
+}
+
+QScrollBar:vertical {
+    border: 0;
+    background: black;
+    width: 12px;
+    margin: 0px 0px 0px 0px;
+}
+
+QScrollBar:horizontal {
+    border: 0;
+    background: black;
+    height: 12px;
+		margin: 0px 0px 0px 22px;
+}
+
+QScrollBar::handle:vertical {
+		background-color: #262626;
+		outline: 0px solid slategrey;
+		border-left: 2px solid #e4b99c;
+		border-right: 1px solid #131313;
+		border-top: 1px solid #131313;
+		border-bottom: 1px solid #131313;
+    min-height: 7px;
+}
+
+QScrollBar::handle:vertical:pressed {
+		background-color: #262626;
+		outline: 0px solid slategrey;
+		border-left: 2px solid #F19B7E;
+    min-height: 7px;
+}
+
+QScrollBar::handle:horizontal {
+		background: #262626;
+		outline: 0px solid slategrey;
+		border-top: 2px solid #e4b99c;
+		border-bottom: 1px solid #131313;
+		border-right: 1px solid #131313;
+		min-width: 7px;
+}
+
+QScrollBar::handle:horizontal:pressed {
+		background: #262626;
+		outline: 0px solid slategrey;
+		border-top: 2px solid #F19B7E;
+    min-width: 7px;
+}
+
+QScrollBar::add-page,
+QScrollBar::sub-page {
+    background-color: black;
+}
+
+QScrollBar::add-line:vertical,
+QScrollBar::sub-line:vertical,
+QScrollBar::add-line:horizontal,
+QScrollBar::sub-line:horizontal {
+    background-color: black;
+    border: 0px solid transparent;
+    width: 10px;
+    height: 10px;
+}
+
+QScrollBar::add-line:vertical:pressed,
+QScrollBar::sub-line:vertical:pressed,
+QScrollBar::add-line:horizontal:pressed,
+QScrollBar::sub-line:horizontal:pressed {
+    background-color: black;
+}
+
+QScrollBar:up-arrow,
+QScrollBar:down-arrow,
+QScrollBar:left-arrow,
+QScrollBar:right-arrow {
+		background-color: #black;
+    width: 10px;
+    height: 10px;
+}
+/*
+QScrollBar:up-arrow {
+    background-image: url(':/images/velesTheme/upArrow');
+}
+
+QScrollBar:down-arrow {
+    background-image: url(':/images/velesTheme/downArrow');
+}
+
+QScrollBar:left-arrow {
+    background-image: url(':/images/velesTheme/leftArrow');
+}
+
+QScrollBar:right-arrow {
+    background-image: url(':/images/velesTheme/rightArrow');
+}
+*/
+QScrollBar::sub-line:vertical {
+    subcontrol-position: top;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::add-line:vertical {
+    subcontrol-position: bottom;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::sub-line:horizontal {
+    subcontrol-position: left;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::add-line:horizontal {
+    subcontrol-position: right;
+    subcontrol-origin: margin;
+}
+
+/********************************* Useful *************************************/
+
+/*
+QMenu {
+	background-color:#f8f6f6;
+}
+
+QMenu::item {
+	color:#333;
+}
+
+QMenu::item:selected {
+	background-color:#a0826f;
+	color:#333;
+}
+
+qproperty-toolButtonStyle: ToolButtonIconOnly;
+
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+    	stop: 0 #e3b89b, stop: 1 #f3d8bb);
+
+
+/******************************************************************************/
