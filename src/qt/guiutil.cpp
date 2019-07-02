@@ -791,6 +791,57 @@ bool SetStartOnSystemStartup(bool fAutoStart) { return false; }
 #endif
 
 // VELES BEGIN
+void migrateQtSettings()
+{
+    // Migration (12.1)
+    QSettings settings;
+    if(!settings.value("fMigrationDone121", false).toBool()) {
+        settings.remove("theme");
+        settings.remove("nWindowPos");
+        settings.remove("nWindowSize");
+        settings.setValue("fMigrationDone121", true);
+    }
+}
+
+void saveWindowGeometry(const QString& strSetting, QWidget *parent)
+{
+    QSettings settings;
+    settings.setValue(strSetting + "Pos", parent->pos());
+    settings.setValue(strSetting + "Size", parent->size());
+}
+
+void restoreWindowGeometry(const QString& strSetting, const QSize& defaultSize, QWidget *parent)
+{
+    QSettings settings;
+    QPoint pos = settings.value(strSetting + "Pos").toPoint();
+    QSize size = settings.value(strSetting + "Size", defaultSize).toSize();
+
+    parent->resize(size);
+    parent->move(pos);
+
+    if ((!pos.x() && !pos.y()) || (QApplication::desktop()->screenNumber(parent) == -1))
+    {
+        QRect screen = QApplication::desktop()->screenGeometry();
+        QPoint defaultPos = screen.center() -
+            QPoint(defaultSize.width() / 2, defaultSize.height() / 2);
+        parent->resize(defaultSize);
+        parent->move(defaultPos);
+    }
+}
+
+// Return name of current UI-theme or default theme if no theme was found
+QString getThemeName()
+{
+    QSettings settings;
+    QString theme = settings.value("theme", "").toString();
+
+    if(!theme.isEmpty()){
+        return theme;
+    }
+    return QString("Veles");
+}
+
+// Open CSS when configured
 QString loadStyleSheet()
 {
     //
@@ -807,13 +858,12 @@ QString loadStyleSheet()
     if(customCssPath != "") {
         cssName = customCssPath;                // load custom CSS for dev / testing purposes
 
-    /* Not used yet:
-    } else if(!theme.isEmpty()){
+    }  if(!theme.isEmpty()){
         cssName = QString(":/css/") + theme;    // custom style from settings
-    */
+
     } else {
-        cssName = QString(":/css/light");       // default style
-        settings.setValue("theme", "light");
+        cssName = QString(":/css/velesTheme");       // default style
+        settings.setValue("theme", "velesTheme");
     }
 
     // load the css

@@ -86,7 +86,24 @@ OptionsDialog::OptionsDialog(QWidget *parent, bool enableWallet) :
         ui->tabWidget->removeTab(ui->tabWidget->indexOf(ui->tabWallet));
     }
 
+    // VELES BEGIN
     /* Display elements init */
+    /* Number of displayed decimal digits selector */
+    /*
+    QString digits;
+    for(int index = 2; index <=8; index++){
+        digits.setNum(index);
+        ui->digits->addItem(digits, digits);
+    }
+    */
+    /* Theme selector */
+    ui->theme->addItem(QString("Bitcoin"), QVariant("bitcoinTheme"));
+    ui->theme->addItem(QString("Light"), QVariant("lightTheme"));
+    ui->theme->addItem(QString("Dark"), QVariant("darkTheme"));
+    ui->theme->addItem(QString("Veles"), QVariant("velesTheme"));
+    // VELES END
+
+    /* Language selector */
     QDir translations(":translations");
 
     ui->bitcoinAtStartup->setToolTip(ui->bitcoinAtStartup->toolTip().arg(tr(PACKAGE_NAME)));
@@ -190,6 +207,9 @@ void OptionsDialog::setModel(OptionsModel *_model)
     connect(ui->connectSocks, &QCheckBox::clicked, this, &OptionsDialog::showRestartWarning);
     connect(ui->connectSocksTor, &QCheckBox::clicked, this, &OptionsDialog::showRestartWarning);
     /* Display */
+    // VELES BEGIN
+    connect(ui->theme, SIGNAL(valueChanged()), this, SLOT(showRestartWarning()));
+    // VELES END
     connect(ui->lang, static_cast<void (QValueComboBox::*)()>(&QValueComboBox::valueChanged), [this]{ showRestartWarning(); });
     connect(ui->thirdPartyTxUrls, &QLineEdit::textChanged, [this]{ showRestartWarning(); });
 }
@@ -242,6 +262,9 @@ void OptionsDialog::setMapper()
 #endif
 
     /* Display */
+    // VELES BEGIN
+    mapper->addMapping(ui->theme, OptionsModel::Theme);
+    // VELES END
     mapper->addMapping(ui->lang, OptionsModel::Language);
     mapper->addMapping(ui->unit, OptionsModel::DisplayUnit);
     mapper->addMapping(ui->thirdPartyTxUrls, OptionsModel::ThirdPartyTxUrls);

@@ -9,6 +9,10 @@
 
 #include <qt/splashscreen.h>
 
+// VELES BEGIN
+#include <qt/guiutil.h>
+// VELES END
+
 #include <qt/networkstyle.h>
 
 #include <clientversion.h>
@@ -35,6 +39,11 @@ SplashScreen::SplashScreen(interfaces::Node& node, Qt::WindowFlags f, const Netw
     int titleVersionVSpace      = 17;
     int titleCopyrightVSpace    = 40;
     // VELES BEGIN
+    // transparent background
+    setAttribute(Qt::WA_TranslucentBackground);
+    setStyleSheet("background:transparent;");
+    // no window decorations
+    setWindowFlags(Qt::FramelessWindowHint);
     int titleCopyrightWidth     = 220;
     int paddingRightCopyright   = 30;
     // VELES END
@@ -63,14 +72,19 @@ SplashScreen::SplashScreen(interfaces::Node& node, Qt::WindowFlags f, const Netw
     QRect splashRect(QPoint(0,0), QSize(480,320));
     QString titleText       = tr(PACKAGE_NAME) + " GUI";
     QString versionText     = QString::fromStdString(FormatFullVersion()).split("-").value(0) + " \"" + CLIENT_VERSION_CODENAME + "\"";
-    QString splashScreenPath = ":/images/splash";
+    //QString splashScreenPath = ":/images/splash";
+    // networkstyle.cpp can't (yet) read themes, so we do it here to get the correct Splash-screen
+    QString splashScreenPath = ":/images/" + GUIUtil::getThemeName() + "/splash";
 
     if (!CLIENT_VERSION_IS_RELEASE)
-        splashScreenPath = ":/images/splash_prerelease";
+        splashScreenPath = ":/images/" + GUIUtil::getThemeName() + "/splash_prerelease";
+        //splashScreenPath = ":/images/splash_prerelease";
     if(gArgs.GetBoolArg("-regtest", false))
-        splashScreenPath = ":/images/splash_testnet";
+        splashScreenPath = ":/images/" + GUIUtil::getThemeName() + "/splash_testnet";
+        //splashScreenPath = ":/images/splash_testnet";
     if(gArgs.GetBoolArg("-testnet", false))
-        splashScreenPath = ":/images/splash_testnet";
+        splashScreenPath = ":/images/" + GUIUtil::getThemeName() + "/splash_testnet";
+        //splashScreenPath = ":/images/splash_testnet";
 
     // replace for copyright sign
     copyrightText.replace("Copyright (C)", QChar(0x00A9));

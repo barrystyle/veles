@@ -49,6 +49,9 @@ public:
         ProxyPortTor,           // int
         DisplayUnit,            // BitcoinUnits::Unit
         ThirdPartyTxUrls,       // QString
+        // VELES BEGIN
+        Theme,                  // QString
+        // VELES END
         Language,               // QString
         CoinControlFeatures,    // bool
         ThreadsScriptVerif,     // int

@@ -119,6 +119,10 @@ OverviewPage::OverviewPage(const PlatformStyle *platformStyle, QWidget *parent) 
 {
     ui->setupUi(this);
 
+    // VELES BEGIN
+    QString theme = GUIUtil::getThemeName();
+    // VELES END
+
     m_balances.balance = -1;
 
     // use a SingleColorIcon for the "out of sync warning" icon

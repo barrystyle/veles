@@ -464,12 +464,26 @@ RPCConsole::RPCConsole(interfaces::Node& node, const PlatformStyle *_platformSty
     ui->blocksDir->setToolTip(ui->blocksDir->toolTip().arg(QString(nonbreaking_hyphen) + "blocksdir"));
     ui->openDebugLogfileButton->setToolTip(ui->openDebugLogfileButton->toolTip().arg(tr(PACKAGE_NAME)));
 
+    // VELES BEGIN
+    QString theme = GUIUtil::getThemeName();
+    // VELES END
     if (platformStyle->getImagesOnButtons()) {
-        ui->openDebugLogfileButton->setIcon(platformStyle->SingleColorIcon(":/icons/export"));
+        // VELES BEGIN
+        ui->openDebugLogfileButton->setIcon(QIcon(":/icons/" + theme + "/export"));
+        //ui->openDebugLogfileButton->setIcon(platformStyle->SingleColorIcon(":/icons/export"));
+        // VELES END
     }
+    // VELES BEGIN
+    /*
     ui->clearButton->setIcon(platformStyle->SingleColorIcon(":/icons/remove"));
     ui->fontBiggerButton->setIcon(platformStyle->SingleColorIcon(":/icons/fontbigger"));
     ui->fontSmallerButton->setIcon(platformStyle->SingleColorIcon(":/icons/fontsmaller"));
+    */
+    // Needed on Mac also
+    ui->clearButton->setIcon(QIcon(":/icons/" + theme + "/remove"));
+    ui->fontBiggerButton->setIcon(QIcon(":/icons/" + theme + "/fontbigger"));
+    ui->fontSmallerButton->setIcon(QIcon(":/icons/" + theme + "/fontsmaller"));
+    // VELES END
 
     // Install event filter for up and down arrow
     ui->lineEdit->installEventFilter(this);
@@ -783,12 +797,19 @@ void RPCConsole::clear(bool clearHistory)
 
     // Add smoothly scaled icon images.
     // (when using width/height on an img, Qt uses nearest instead of linear interpolation)
+    // VELES BEGIN
+    QString iconPath = ":/icons/" + GUIUtil::getThemeName() + "/";
+    QString iconName = "";
+    // VELES END
     for(int i=0; ICON_MAPPING[i].url; ++i)
     {
         ui->messagesWidget->document()->addResource(
                     QTextDocument::ImageResource,
                     QUrl(ICON_MAPPING[i].url),
-                    platformStyle->SingleColorImage(ICON_MAPPING[i].source).scaled(QSize(consoleFontSize*2, consoleFontSize*2), Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
+                    // VELES BEGIN
+                    QImage(iconPath + iconName).scaled(QSize(consoleFontSize*2, consoleFontSize*2), Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
+                    //platformStyle->SingleColorImage(ICON_MAPPING[i].source).scaled(QSize(consoleFontSize*2, consoleFontSize*2), Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
+                    // VELES END
     }
 
     // Set default style sheet

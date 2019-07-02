@@ -27,6 +27,8 @@ SignVerifyMessageDialog::SignVerifyMessageDialog(const PlatformStyle *_platformS
 {
     ui->setupUi(this);
 
+    // VELES BEGIN
+    /*
     ui->addressBookButton_SM->setIcon(platformStyle->SingleColorIcon(":/icons/address-book"));
     ui->pasteButton_SM->setIcon(platformStyle->SingleColorIcon(":/icons/editpaste"));
     ui->copySignatureButton_SM->setIcon(platformStyle->SingleColorIcon(":/icons/editcopy"));
@@ -35,6 +37,27 @@ SignVerifyMessageDialog::SignVerifyMessageDialog(const PlatformStyle *_platformS
     ui->addressBookButton_VM->setIcon(platformStyle->SingleColorIcon(":/icons/address-book"));
     ui->verifyMessageButton_VM->setIcon(platformStyle->SingleColorIcon(":/icons/transaction_0"));
     ui->clearButton_VM->setIcon(platformStyle->SingleColorIcon(":/icons/remove"));
+    */
+    QString theme = GUIUtil::getThemeName();
+
+    #ifdef Q_OS_MAC // Icons on push buttons are very uncommon on Mac
+    ui->signMessageButton_SM->setIcon(QIcon());
+    ui->clearButton_SM->setIcon(QIcon());
+    ui->verifyMessageButton_VM->setIcon(QIcon());
+    ui->clearButton_VM->setIcon(QIcon());
+    #else
+    ui->signMessageButton_SM->setIcon(QIcon(":/icons/" + theme + "/edit"));
+    ui->clearButton_SM->setIcon(QIcon(":/icons/" + theme + "/remove"));
+    ui->verifyMessageButton_VM->setIcon(QIcon(":/icons/" + theme + "/transaction_0"));
+    ui->clearButton_VM->setIcon(QIcon(":/icons/" + theme + "/remove"));
+    #endif
+
+    // These icons are needed on Mac also
+    ui->addressBookButton_SM->setIcon(QIcon(":/icons/" + theme + "/address-book"));
+    ui->pasteButton_SM->setIcon(QIcon(":/icons/" + theme + "/editpaste"));
+    ui->copySignatureButton_SM->setIcon(QIcon(":/icons/" + theme + "/editcopy"));
+    ui->addressBookButton_VM->setIcon(QIcon(":/icons/" + theme + "/address-book"));
+    // VELES END
 
     ui->signatureOut_SM->setPlaceholderText(tr("Click \"Sign Message\" to generate signature"));
 

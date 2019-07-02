@@ -26,12 +26,24 @@ SendCoinsEntry::SendCoinsEntry(const PlatformStyle *_platformStyle, QWidget *par
 {
     ui->setupUi(this);
 
+    // VELES BEGIN
+    QString theme = GUIUtil::getThemeName();
+
+    // These icons are needed on Mac also!
+    ui->addressBookButton->setIcon(QIcon(":/icons/" + theme + "/address-book"));
+    ui->pasteButton->setIcon(QIcon(":/icons/" + theme + "/editpaste"));
+    ui->deleteButton->setIcon(QIcon(":/icons/" + theme + "/remove"));
+    ui->deleteButton_is->setIcon(QIcon(":/icons/" + theme + "/remove"));
+    ui->deleteButton_s->setIcon(QIcon(":/icons/" + theme + "/remove"));
+    /*
     ui->addressBookButton->setIcon(platformStyle->SingleColorIcon(":/icons/address-book"));
     ui->pasteButton->setIcon(platformStyle->SingleColorIcon(":/icons/editpaste"));
     ui->deleteButton->setIcon(platformStyle->SingleColorIcon(":/icons/remove"));
     ui->deleteButton_is->setIcon(platformStyle->SingleColorIcon(":/icons/remove"));
     ui->deleteButton_s->setIcon(platformStyle->SingleColorIcon(":/icons/remove"));
+    */
 
+    // VELES END
     setCurrentWidget(ui->SendCoins);
 
     if (platformStyle->getUseExtraSpacing())
