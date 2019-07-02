@@ -3,7 +3,7 @@ Veles Core integration/staging tree
 
 [![Build Status](https://travis-ci.org/veles/veles.svg?branch=0.18)](https://travis-ci.org/veles/veles)
 
-https://fixedtradecoin.org
+https://veles.network
 
 Linux Build Instructions and Notes
 ==================================
