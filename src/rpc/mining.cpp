@@ -480,10 +480,11 @@ static UniValue getmultialgostatus(const JSONRPCRequest& request)
 #else
     if (request.fHelp || request.params.size() != 0)
         throw std::runtime_error(
-            "getmultialgostatus                 *** NEW: Experimental ***\n"
+            RPCHelpMan{"getmultialgostatus                 *** NEW: Experimental ***\n"
             "\n*** Experimental: Use at your own risk, might be a subject to change any time. ***\n"
             "\nReturns a json object containing information related to multi-algo mining.\n"
-            "\nResult:\n"
+            {},
+            RPCResult{
             "[\n"
             "  {\n"
             "    \"algo\": xxxxxx                  (string)  PoW algorithm algorithm name.\n"
@@ -495,10 +496,12 @@ static UniValue getmultialgostatus(const JSONRPCRequest& request)
             "]\n"
             "\nSupported algorithms:\n"
             "  sha256d, scrypt, lyra2z, x11, x16, nist5.\n"
-            "\nExamples:\n"
-            + HelpExampleCli("getmultialgostatus", "")
+            },
+            RPCExamples{
+                HelpExampleCli("getmultialgostatus", "")
             + HelpExampleRpc("getmultialgostatus", "")
-        );
+            },
+        }.ToString());
 
     //LOCK(cs_main);
 
