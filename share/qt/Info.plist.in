@@ -38,7 +38,7 @@
   <true/>
 
   <key>CFBundleIdentifier</key>
-  <string>org.velesoinfoundation.Veles-Qt</string>
+  <string>org.velesfoundation.Veles-Qt</string>
 
   <key>CFBundleURLTypes</key>
   <array>
@@ -46,10 +46,10 @@
       <key>CFBundleTypeRole</key>
       <string>Editor</string>
       <key>CFBundleURLName</key>
-      <string>org.velesoin.VelesPayment</string>
+      <string>org.veles.VelesPayment</string>
       <key>CFBundleURLSchemes</key>
       <array>
-        <string>velesoin</string>
+        <string>veles</string>
       </array>
     </dict>
   </array>
@@ -58,7 +58,7 @@
   <array>
     <dict>
       <key>UTTypeIdentifier</key>
-      <string>org.velesoin.paymentrequest</string>
+      <string>org.veles.paymentrequest</string>
       <key>UTTypeDescription</key>
       <string>Veles payment request</string>
       <key>UTTypeConformsTo</key>
@@ -68,10 +68,10 @@
       <key>UTTypeTagSpecification</key>
       <dict>
         <key>public.mime-type</key>
-        <string>application/x-velesoin-payment-request</string>
+        <string>application/x-veles-payment-request</string>
         <key>public.filename-extension</key>
         <array>
-          <string>velesoinpaymentrequest</string>
+          <string>velespaymentrequest</string>
         </array>
       </dict>
     </dict>
@@ -84,7 +84,7 @@
       <string>Editor</string>
       <key>LSItemContentTypes</key>
       <array>
-        <string>org.velesoin.paymentrequest</string>
+        <string>org.veles.paymentrequest</string>
       </array>
       <key>LSHandlerRank</key>
       <string>Owner</string>

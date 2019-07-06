@@ -16,7 +16,7 @@ OpenURIDialog::OpenURIDialog(QWidget *parent) :
     ui(new Ui::OpenURIDialog)
 {
     ui->setupUi(this);
-    ui->uriEdit->setPlaceholderText("velesoin:");
+    ui->uriEdit->setPlaceholderText("veles:");
 }
 
 OpenURIDialog::~OpenURIDialog()
@@ -47,5 +47,5 @@ void OpenURIDialog::on_selectFileButton_clicked()
     if(filename.isEmpty())
         return;
     QUrl fileUri = QUrl::fromLocalFile(filename);
-    ui->uriEdit->setText("velesoin:?r=" + QUrl::toPercentEncoding(fileUri.toString()));
+    ui->uriEdit->setText("veles:?r=" + QUrl::toPercentEncoding(fileUri.toString()));
 }

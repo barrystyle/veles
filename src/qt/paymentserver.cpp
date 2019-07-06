@@ -49,15 +49,15 @@
 #include <QUrlQuery>
 
 const int BITCOIN_IPC_CONNECT_TIMEOUT = 1000; // milliseconds
-const QString BITCOIN_IPC_PREFIX("velesoin:");
+const QString BITCOIN_IPC_PREFIX("veles:");
 #ifdef ENABLE_BIP70
 // BIP70 payment protocol messages
 const char* BIP70_MESSAGE_PAYMENTACK = "PaymentACK";
 const char* BIP70_MESSAGE_PAYMENTREQUEST = "PaymentRequest";
 // BIP71 payment protocol media types
-const char* BIP71_MIMETYPE_PAYMENT = "application/velesoin-payment";
-const char* BIP71_MIMETYPE_PAYMENTACK = "application/velesoin-paymentack";
-const char* BIP71_MIMETYPE_PAYMENTREQUEST = "application/velesoin-paymentrequest";
+const char* BIP71_MIMETYPE_PAYMENT = "application/veles-payment";
+const char* BIP71_MIMETYPE_PAYMENTACK = "application/veles-paymentack";
+const char* BIP71_MIMETYPE_PAYMENTREQUEST = "application/veles-paymentrequest";
 #endif
 
 //
@@ -102,11 +102,11 @@ void PaymentServer::ipcParseCommandLine(interfaces::Node& node, int argc, char* 
         if (arg.startsWith("-"))
             continue;
 
-        // If the velesoin: URI contains a payment request, we are not able to detect the
+        // If the veles: URI contains a payment request, we are not able to detect the
         // network as that would require fetching and parsing the payment request.
         // That means clicking such an URI which contains a testnet payment request
         // will start a mainnet instance and throw a "wrong network" error.
-        if (arg.startsWith(BITCOIN_IPC_PREFIX, Qt::CaseInsensitive)) // velesoin: URI
+        if (arg.startsWith(BITCOIN_IPC_PREFIX, Qt::CaseInsensitive)) // veles: URI
         {
             savedPaymentRequests.append(arg);
 
@@ -208,7 +208,7 @@ PaymentServer::PaymentServer(QObject* parent, bool startLocalServer) :
 #endif
 
     // Install global event filter to catch QFileOpenEvents
-    // on Mac: sent when you click velesoin: links
+    // on Mac: sent when you click veles: links
     // other OSes: helpful when dealing with payment request files
     if (parent)
         parent->installEventFilter(this);
@@ -225,7 +225,7 @@ PaymentServer::PaymentServer(QObject* parent, bool startLocalServer) :
         if (!uriServer->listen(name)) {
             // constructor is called early in init, so don't use "Q_EMIT message()" here
             QMessageBox::critical(nullptr, tr("Payment request error"),
-                tr("Cannot start velesoin: click-to-pay handler"));
+                tr("Cannot start veles: click-to-pay handler"));
         }
         else {
             connect(uriServer, &QLocalServer::newConnection, this, &PaymentServer::handleURIConnection);
@@ -244,7 +244,7 @@ PaymentServer::~PaymentServer()
 }
 
 //
-// OSX-specific way of handling velesoin: URIs and PaymentRequest mime types.
+// OSX-specific way of handling veles: URIs and PaymentRequest mime types.
 // Also used by paymentservertests.cpp and when opening a payment request file
 // via "Open URI..." menu entry.
 //
@@ -285,12 +285,12 @@ void PaymentServer::handleURIOrFile(const QString& s)
         return;
     }
 
-    if (s.startsWith("velesoin://", Qt::CaseInsensitive))
+    if (s.startsWith("veles://", Qt::CaseInsensitive))
     {
-        Q_EMIT message(tr("URI handling"), tr("'velesoin://' is not a valid URI. Use 'velesoin:' instead."),
+        Q_EMIT message(tr("URI handling"), tr("'veles://' is not a valid URI. Use 'veles:' instead."),
             CClientUIInterface::MSG_ERROR);
     }
-    else if (s.startsWith(BITCOIN_IPC_PREFIX, Qt::CaseInsensitive)) // velesoin: URI
+    else if (s.startsWith(BITCOIN_IPC_PREFIX, Qt::CaseInsensitive)) // veles: URI
     {
         QUrlQuery uri((QUrl(s)));
 #ifdef ENABLE_BIP70
@@ -507,7 +507,7 @@ void PaymentServer::initNetManager()
         return;
     delete netManager;
 
-    // netManager is used to fetch paymentrequests given in velesoin: URIs
+    // netManager is used to fetch paymentrequests given in veles: URIs
     netManager = new QNetworkAccessManager(this);
 
     QNetworkProxy proxy;
@@ -592,7 +592,7 @@ bool PaymentServer::processPaymentRequest(const PaymentRequestPlus& request, Sen
             addresses.append(QString::fromStdString(EncodeDestination(dest)));
         }
         else if (!recipient.authenticatedMerchant.isEmpty()) {
-            // Unauthenticated payment requests to custom velesoin addresses are not supported
+            // Unauthenticated payment requests to custom veles addresses are not supported
             // (there is no good way to tell the user where they are paying in a way they'd
             // have a chance of understanding).
             Q_EMIT message(tr("Payment request rejected"),
