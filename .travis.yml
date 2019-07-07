@@ -64,7 +64,7 @@ jobs:
         GOAL="install"
         # -Wno-psabi is to disable ABI warnings: "note: parameter passing for argument of type ... changed in GCC 7.1"
         # This could be removed once the ABI change warning does not show up by default
-        BITCOIN_CONFIG="--enable-glibc-back-compat --enable-reduce-exports CXXFLAGS=-Wno-psabi --disable-test"
+        BITCOIN_CONFIG="--enable-glibc-back-compat --enable-reduce-exports CXXFLAGS=-Wno-psabi --disable-tests --without-gui"
 
     - stage: test
       name: 'Win32  [GOAL: deploy]  [no gui or functional tests]'
@@ -74,7 +74,7 @@ jobs:
         PACKAGES="python3 nsis g++-mingw-w64-i686 wine-binfmt wine32"
         RUN_FUNCTIONAL_TESTS=false
         GOAL="deploy"
-        BITCOIN_CONFIG="--enable-reduce-exports --disable-gui-tests --disable-tests"
+        BITCOIN_CONFIG="--enable-reduce-exports --disable-gui-tests --disable-tests --without-gui"
 
     - stage: test
       name: 'Win64  [GOAL: deploy]  [no gui or functional tests]'
@@ -83,7 +83,7 @@ jobs:
         PACKAGES="python3 nsis g++-mingw-w64-x86-64 wine-binfmt wine64"
         RUN_FUNCTIONAL_TESTS=false
         GOAL="deploy"
-        BITCOIN_CONFIG="--enable-reduce-exports --disable-tests --disable-gui-tests"
+        BITCOIN_CONFIG="--enable-reduce-exports --disable-tests --disable-gui-tests --without-gui"
 
     - stage: test
       name: '32-bit + dash  [GOAL: install]  [GUI: no BIP70]'
@@ -91,7 +91,7 @@ jobs:
         HOST=i686-pc-linux-gnu
         PACKAGES="g++-multilib python3-zmq"
         GOAL="install"
-        BITCOIN_CONFIG="--enable-zmq --with-gui=qt5 --disable-tests --disable-bip70 --enable-glibc-back-compat --enable-reduce-exports LDFLAGS=-static-libstdc++"
+        BITCOIN_CONFIG="--enable-zmq --without-gui --disable-tests --disable-bip70 --enable-glibc-back-compat --enable-reduce-exports LDFLAGS=-static-libstdc++"
         CONFIG_SHELL="/bin/dash"
 
     - stage: test
@@ -152,7 +152,7 @@ jobs:
         PACKAGES="python3-zmq"
         DEP_OPTS="NO_WALLET=1"
         GOAL="install"
-        BITCOIN_CONFIG="--enable-glibc-back-compat --enable-reduce-exports --disable-tests"
+        BITCOIN_CONFIG="--enable-glibc-back-compat --enable-reduce-exports --without-gui --disable-tests"
 
     - stage: test
       name: 'macOS 10.10  [GOAL: deploy] [no functional tests]'
