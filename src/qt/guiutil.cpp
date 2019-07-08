@@ -838,7 +838,7 @@ QString getThemeName()
     if(!theme.isEmpty()){
         return theme;
     }
-    return QString("Veles");
+    return QString("velesTheme");
 }
 
 // Open CSS when configured
@@ -851,25 +851,30 @@ QString loadStyleSheet()
     QString styleSheet;
     QSettings settings;
     QString cssName;
-    QString theme = settings.value("theme", "").toString();
+    QString theme = getThemeName();
     QString customCssPath = QString::fromStdString(gArgs.GetArg("-loadcss", ""));
     QString dumpCssPath = QString::fromStdString(gArgs.GetArg("-dumpcss", ""));
 
     if(customCssPath != "") {
         cssName = customCssPath;                // load custom CSS for dev / testing purposes
-
-    }  if(!theme.isEmpty()){
-        cssName = QString(":/css/") + theme;    // custom style from settings
-
     } else {
-        cssName = QString(":/css/velesTheme");       // default style
+        cssName = QString(":/css/") + theme;    // custom style from settings
+    }
+
+    // check if theme available
+    QFile qFileCheck(cssName);
+    if (!qFileCheck.open(QFile::ReadOnly)) {
+        cssName = QString(":/css/velesTheme");       // default style if theme not available
         settings.setValue("theme", "velesTheme");
+    } else {
+        qFileCheck.close();
     }
 
     // load the css
     QFile qFile(cssName);
     if (qFile.open(QFile::ReadOnly)) {
         styleSheet = QLatin1String(qFile.readAll());
+        qFile.close();
     }
 
     // dump the css if rewuired
@@ -878,6 +883,7 @@ QString loadStyleSheet()
         if (outFile.open(QFile::WriteOnly | QFile::Truncate)) {
             QTextStream out(&outFile);
             out << styleSheet;
+            outFile.close();
         }
     }
 

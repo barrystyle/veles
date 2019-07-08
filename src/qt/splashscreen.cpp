@@ -74,16 +74,27 @@ SplashScreen::SplashScreen(interfaces::Node& node, Qt::WindowFlags f, const Netw
     QString versionText     = QString::fromStdString(FormatFullVersion()).split("-").value(0) + " \"" + CLIENT_VERSION_CODENAME + "\"";
     //QString splashScreenPath = ":/images/splash";
     // networkstyle.cpp can't (yet) read themes, so we do it here to get the correct Splash-screen
-    QString splashScreenPath = ":/images/" + GUIUtil::getThemeName() + "/splash";
+    QString theme = GUIUtil::getThemeName();
+    // check if theme available
+    QString cssName;
+    cssName = QString(":/css/") + theme;
+    QFile qFileCheck(cssName);
+    if (!qFileCheck.open(QFile::ReadOnly)) {
+        theme = "velesTheme"; // default theme if not available
+    } else {
+        qFileCheck.close();
+    }
+
+    QString splashScreenPath = ":/images/" + theme + "/splash";
 
     if (!CLIENT_VERSION_IS_RELEASE)
-        splashScreenPath = ":/images/" + GUIUtil::getThemeName() + "/splash_prerelease";
+        splashScreenPath = ":/images/" + theme + "/splash_prerelease";
         //splashScreenPath = ":/images/splash_prerelease";
     if(gArgs.GetBoolArg("-regtest", false))
-        splashScreenPath = ":/images/" + GUIUtil::getThemeName() + "/splash_testnet";
+        splashScreenPath = ":/images/" + theme + "/splash_testnet";
         //splashScreenPath = ":/images/splash_testnet";
     if(gArgs.GetBoolArg("-testnet", false))
-        splashScreenPath = ":/images/" + GUIUtil::getThemeName() + "/splash_testnet";
+        splashScreenPath = ":/images/" + theme + "/splash_testnet";
         //splashScreenPath = ":/images/splash_testnet";
 
     // replace for copyright sign
