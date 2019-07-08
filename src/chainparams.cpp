@@ -2,6 +2,7 @@
 // Copyright (c) 2009-2018 The Bitcoin Core developers
 // Copyright (c) 2014-2017 The Dash Core developers
 // Copyright (c) 2018 FXTC developers
+// Copyright (c) 2018 The Veles Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -104,10 +105,10 @@ public:
 
         // FXTC TODO: BIP16Exception is valid for BTC blockchain only
         consensus.BIP16Exception = uint256S("");
-        consensus.BIP34Height = 20; // genesis
-        consensus.BIP34Hash = uint256S("0x001"); // genesis hash
-        consensus.BIP65Height = 30; // genesis
-        consensus.BIP66Height = 30; // genesis
+        consensus.BIP34Height = 20; // 20
+        consensus.BIP34Hash = uint256S("0x001"); // 20
+        consensus.BIP65Height = 30; // 30
+        consensus.BIP66Height = 30; // 30
         consensus.powLimit = uint256S("0x00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.nPowTargetTimespan = 4 * 60 * 60; // one day
         consensus.nPowTargetSpacing = 2 * 60; // one minute
