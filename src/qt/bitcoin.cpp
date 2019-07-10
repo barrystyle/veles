@@ -1,6 +1,7 @@
 // Copyright (c) 2011-2019 The Bitcoin Core developers
 // Copyright (c) 2014-2017 The Dash Core developers
 // Copyright (c) 2018 FXTC developers
+// Copyright (c) 2018-2019 The Veles Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -419,6 +420,10 @@ static void SetupUIArgs()
     gArgs.AddArg("-rootcertificates=<file>", "Set SSL root certificates for payment request (default: -system-)", false, OptionsCategory::GUI);
     gArgs.AddArg("-splash", strprintf("Show splash screen on startup (default: %u)", DEFAULT_SPLASHSCREEN), false, OptionsCategory::GUI);
     gArgs.AddArg("-uiplatform", strprintf("Select platform to customize UI for (one of windows, macosx, other; default: %s)", BitcoinGUI::DEFAULT_UIPLATFORM), true, OptionsCategory::GUI);
+    // VELES BEGIN
+    gArgs.AddArg("-loadcss=<file>", "Load theme stylesheet from external file", true, OptionsCategory::GUI);
+    gArgs.AddArg("-dumpcss=<file>", "Dump built-in theme stylesheet to file", true, OptionsCategory::GUI);
+    // VELES END
 }
 
 #ifndef BITCOIN_QT_TEST

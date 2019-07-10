@@ -312,7 +312,7 @@
       </size>
      </property>
      <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
+      <enum>QFrame::NoFrame</enum>
      </property>
      <property name="frameShadow">
       <enum>QFrame::Sunken</enum>
@@ -408,7 +408,7 @@
       <bool>true</bool>
      </attribute>
      <attribute name="headerStretchLastSection">
-      <bool>false</bool>
+      <bool>true</bool>
      </attribute>
      <column>
       <property name="text">
@@ -443,6 +443,7 @@
        <string>Confirmed</string>
       </property>
      </column>
+     <!--
      <column>
       <property name="text">
        <string/>
@@ -462,7 +463,7 @@
       <property name="text">
        <string/>
       </property>
-     </column>
+    </column> -->
     </widget>
    </item>
    <item>

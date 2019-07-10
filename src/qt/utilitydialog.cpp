@@ -56,7 +56,7 @@ HelpMessageDialog::HelpMessageDialog(interfaces::Node& node, QWidget *parent, bo
     {
         setWindowTitle(tr("About %1").arg(tr(PACKAGE_NAME)));
 
-        std::string licenseInfo = LicenseInfo();
+        //std::string licenseInfo = LicenseInfo();
         /// HTML-format the license message from the core
         QString licenseInfoHTML = QString::fromStdString(LicenseInfo());
         // Make URLs clickable
@@ -68,13 +68,17 @@ HelpMessageDialog::HelpMessageDialog(interfaces::Node& node, QWidget *parent, bo
 
         ui->aboutMessage->setTextFormat(Qt::RichText);
         ui->scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
-        text = version + "\n" + QString::fromStdString(FormatParagraph(licenseInfo));
-        ui->aboutMessage->setText(version + "<br><br>" + licenseInfoHTML);
+        // VELES BEGIN
+        text = version + "\n\"" + CLIENT_VERSION_CODENAME + "\"\n\n" + licenseInfoHTML;
+        ui->aboutMessage->setText(version + "<br>\"" + CLIENT_VERSION_CODENAME + "\"<br><br>" + licenseInfoHTML);
+        //text = version + "\n\n" + licenseInfo;
+        //ui->aboutMessage->setText(version + "<br><br>" + licenseInfoHTML);
+        // VELES END
         ui->aboutMessage->setWordWrap(true);
         ui->helpMessage->setVisible(false);
     } else {
         setWindowTitle(tr("Command-line options"));
-        QString header = "Usage:  fxtc-qt [command-line options]                     \n";
+        QString header = "Usage:  veles-qt [command-line options]                     \n";
         QTextCursor cursor(ui->helpMessage->document());
         cursor.insertText(version);
         cursor.insertBlock();
@@ -120,6 +124,12 @@ HelpMessageDialog::HelpMessageDialog(interfaces::Node& node, QWidget *parent, bo
         ui->scrollArea->setVisible(false);
         ui->aboutLogo->setVisible(false);
     }
+    // VELES BEGIN
+    // Theme dependent Gfx in About popup
+    QString helpMessageGfx = ":/images/" + GUIUtil::getThemeName() + "/about";
+    QPixmap pixmap = QPixmap(helpMessageGfx);
+    ui->aboutLogo->setPixmap(pixmap);
+    // VELES END
 }
 
 HelpMessageDialog::~HelpMessageDialog()

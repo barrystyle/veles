@@ -8,6 +8,9 @@
 #include <qt/transactiontablemodel.h>
 
 #include <QModelIndex>
+// VELES BEGIN
+#include <qt/guiutil.h>
+// VELES END
 
 TransactionDescDialog::TransactionDescDialog(const QModelIndex &idx, QWidget *parent) :
     QDialog(parent),
@@ -15,6 +18,10 @@ TransactionDescDialog::TransactionDescDialog(const QModelIndex &idx, QWidget *pa
 {
     ui->setupUi(this);
     setWindowTitle(tr("Details for %1").arg(idx.data(TransactionTableModel::TxHashRole).toString()));
+    // VELES BEGIN
+    /* Open CSS when configured */
+    this->setStyleSheet(GUIUtil::loadStyleSheet());
+    // VELES END
     QString desc = idx.data(TransactionTableModel::LongDescriptionRole).toString();
     ui->detailText->setHtml(desc);
 }

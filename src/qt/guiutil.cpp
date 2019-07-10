@@ -53,6 +53,9 @@
 #include <QProgressDialog>
 #include <QSettings>
 #include <QTextDocument> // for Qt::mightBeRichText
+// VELES BEGIN
+#include <QTextStream>   // for CSS dumping
+// VELES END
 #include <QThread>
 #include <QUrlQuery>
 
@@ -106,7 +109,7 @@ void setupAddressWidget(QValidatedLineEdit *widget, QWidget *parent)
     widget->setFont(fixedPitchFont());
     // We don't want translators to use own addresses in translations
     // and this is the only place, where this address is supplied.
-    widget->setPlaceholderText(QObject::tr("Enter a FxTCoin address (e.g. %1)").arg(
+    widget->setPlaceholderText(QObject::tr("Enter a Veles address (e.g. %1)").arg(
         QString::fromStdString(DummyAddress(Params()))));
     widget->setValidator(new BitcoinAddressEntryValidator(parent));
     widget->setCheckValidator(new BitcoinAddressCheckValidator(parent));
@@ -115,7 +118,7 @@ void setupAddressWidget(QValidatedLineEdit *widget, QWidget *parent)
 bool parseBitcoinURI(const QUrl &uri, SendCoinsRecipient *out)
 {
     // return if URI is not valid or is no bitcoin: URI
-    if(!uri.isValid() || uri.scheme() != QString("fxtcoin"))
+    if(!uri.isValid() || uri.scheme() != QString("veles"))
         return false;
 
     SendCoinsRecipient rv;
@@ -177,7 +180,7 @@ bool parseBitcoinURI(QString uri, SendCoinsRecipient *out)
 
 QString formatBitcoinURI(const SendCoinsRecipient &info)
 {
-    QString ret = QString("fxtcoin:%1").arg(info.address);
+    QString ret = QString("veles:%1").arg(info.address);
     int paramCount = 0;
 
     if (info.amount)
@@ -560,10 +563,10 @@ fs::path static StartupShortcutPath()
 {
     std::string chain = gArgs.GetChainName();
     if (chain == CBaseChainParams::MAIN)
-        return GetSpecialFolderPath(CSIDL_STARTUP) / "FxTCoin.lnk";
+        return GetSpecialFolderPath(CSIDL_STARTUP) / "Veles.lnk";
     if (chain == CBaseChainParams::TESTNET) // Remove this special case when CBaseChainParams::TESTNET = "testnet4"
-        return GetSpecialFolderPath(CSIDL_STARTUP) / "FxTCoin (testnet).lnk";
-    return GetSpecialFolderPath(CSIDL_STARTUP) / strprintf("FxTCoin (%s).lnk", chain);
+        return GetSpecialFolderPath(CSIDL_STARTUP) / "Veles (testnet).lnk";
+    return GetSpecialFolderPath(CSIDL_STARTUP) / strprintf("Veles (%s).lnk", chain);
 }
 
 bool GetStartOnSystemStartup()
@@ -643,8 +646,8 @@ fs::path static GetAutostartFilePath()
 {
     std::string chain = gArgs.GetChainName();
     if (chain == CBaseChainParams::MAIN)
-        return GetAutostartDir() / "FxTCoin.desktop";
-    return GetAutostartDir() / strprintf("fxtcoin-%s.lnk", chain);
+        return GetAutostartDir() / "Veles.desktop";
+    return GetAutostartDir() / strprintf("veles-%s.lnk", chain);
 }
 
 bool GetStartOnSystemStartup()
@@ -688,9 +691,9 @@ bool SetStartOnSystemStartup(bool fAutoStart)
         optionFile << "[Desktop Entry]\n";
         optionFile << "Type=Application\n";
         if (chain == CBaseChainParams::MAIN)
-            optionFile << "Name=FxTCoin\n";
+            optionFile << "Name=Veles\n";
         else
-            optionFile << strprintf("Name=FxTCoin (%s)\n", chain);
+            optionFile << strprintf("Name=Veles (%s)\n", chain);
         optionFile << "Exec=" << pszExePath << strprintf(" -min -testnet=%d -regtest=%d\n", gArgs.GetBoolArg("-testnet", false), gArgs.GetBoolArg("-regtest", false));
         optionFile << "Terminal=false\n";
         optionFile << "Hidden=false\n";
@@ -786,6 +789,107 @@ bool GetStartOnSystemStartup() { return false; }
 bool SetStartOnSystemStartup(bool fAutoStart) { return false; }
 
 #endif
+
+// VELES BEGIN
+void migrateQtSettings()
+{
+    // Migration (12.1)
+    QSettings settings;
+    if(!settings.value("fMigrationDone121", false).toBool()) {
+        settings.remove("theme");
+        settings.remove("nWindowPos");
+        settings.remove("nWindowSize");
+        settings.setValue("fMigrationDone121", true);
+    }
+}
+
+void saveWindowGeometry(const QString& strSetting, QWidget *parent)
+{
+    QSettings settings;
+    settings.setValue(strSetting + "Pos", parent->pos());
+    settings.setValue(strSetting + "Size", parent->size());
+}
+
+void restoreWindowGeometry(const QString& strSetting, const QSize& defaultSize, QWidget *parent)
+{
+    QSettings settings;
+    QPoint pos = settings.value(strSetting + "Pos").toPoint();
+    QSize size = settings.value(strSetting + "Size", defaultSize).toSize();
+
+    parent->resize(size);
+    parent->move(pos);
+
+    if ((!pos.x() && !pos.y()) || (QApplication::desktop()->screenNumber(parent) == -1))
+    {
+        QRect screen = QApplication::desktop()->screenGeometry();
+        QPoint defaultPos = screen.center() -
+            QPoint(defaultSize.width() / 2, defaultSize.height() / 2);
+        parent->resize(defaultSize);
+        parent->move(defaultPos);
+    }
+}
+
+// Return name of current UI-theme or default theme if no theme was found
+QString getThemeName()
+{
+    QSettings settings;
+    QString theme = settings.value("theme", "").toString();
+
+    if(!theme.isEmpty()){
+        return theme;
+    }
+    return QString("velesTheme");
+}
+
+// Open CSS when configured
+QString loadStyleSheet()
+{
+    //
+    // Load the stylesheet according to settings, override with -loadcss parameter,
+    // dump the currently loaded stylesheet with -outcss.
+    //
+    QString styleSheet;
+    QSettings settings;
+    QString cssName;
+    QString theme = getThemeName();
+    QString customCssPath = QString::fromStdString(gArgs.GetArg("-loadcss", ""));
+    QString dumpCssPath = QString::fromStdString(gArgs.GetArg("-dumpcss", ""));
+
+    if(customCssPath != "") {
+        cssName = customCssPath;                // load custom CSS for dev / testing purposes
+    } else {
+        cssName = QString(":/css/") + theme;    // custom style from settings
+    }
+
+    // check if theme available
+    QFile qFileCheck(cssName);
+    if (!qFileCheck.open(QFile::ReadOnly)) {
+        cssName = QString(":/css/velesTheme");       // default style if theme not available
+        settings.setValue("theme", "velesTheme");
+    } else {
+        qFileCheck.close();
+    }
+
+    // load the css
+    QFile qFile(cssName);
+    if (qFile.open(QFile::ReadOnly)) {
+        styleSheet = QLatin1String(qFile.readAll());
+        qFile.close();
+    }
+
+    // dump the css if rewuired
+    if(dumpCssPath != "") {
+        QFile outFile(dumpCssPath);
+        if (outFile.open(QFile::WriteOnly | QFile::Truncate)) {
+            QTextStream out(&outFile);
+            out << styleSheet;
+            outFile.close();
+        }
+    }
+
+    return styleSheet;
+}
+// VELES END
 
 void setClipboard(const QString& str)
 {

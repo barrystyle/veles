@@ -2,6 +2,7 @@
 // Copyright (c) 2009-2018 The Bitcoin Core developers
 // Copyright (c) 2014-2017 The Dash Core developers
 // Copyright (c) 2018 FXTC developers
+// Copyright (c) 2018-2019 The Veles Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -69,11 +70,19 @@ struct Params {
     // Dash
     int nMasternodeMinimumConfirmations;
     int nMasternodePaymentsStartBlock;
-    int nMasternodePaymentsIncreaseBlock;
+    //int nMasternodePaymentsIncreaseBlock;
     int nMasternodePaymentsIncreasePeriod; // in blocks
     int nMasternodeCollateralMinimum; // in coins
     int nMasternodeCollateralMaximum; // in coins
-
+    // VELES BEGIN
+    int nMasternodePaymentsStartPercent;
+    int nMasternodePaymentsFinalPercent;
+    int nMasternodePaymentsLegacyPercent;
+    int nDevFundPaymentsDecreasePeriod;
+    int nDevFundPaymentsStartPercent;
+    int nDevFundPaymentsFinalPercent;
+    int nDevFundPaymentsLegacyPercent;
+    // VELES END
     int nInstantSendKeepLock; // in blocks
 
     int nBudgetPaymentsStartBlock;
@@ -116,7 +125,11 @@ struct Params {
     uint256 defaultAssumeValid;
     // FXTC BEGIN
     int nlastValidPowHashHeight;
-    // FXTC EMD
+    // FXTC END
+    // VELES BEGIN
+    // Veles hard fork to enable Alpha block reward upgrade
+    int nVlsRewardsAlphaMultiplier;
+    // VELES END
 };
 } // namespace Consensus
 

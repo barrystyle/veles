@@ -64,14 +64,25 @@ SendCoinsDialog::SendCoinsDialog(const PlatformStyle *_platformStyle, QWidget *p
 {
     ui->setupUi(this);
 
+    // VELES BEGIN
+    QString theme = GUIUtil::getThemeName();
+    // VELES END
+
     if (!_platformStyle->getImagesOnButtons()) {
         ui->addButton->setIcon(QIcon());
         ui->clearButton->setIcon(QIcon());
         ui->sendButton->setIcon(QIcon());
     } else {
+        // VELES BEGIN
+        /*
         ui->addButton->setIcon(_platformStyle->SingleColorIcon(":/icons/add"));
         ui->clearButton->setIcon(_platformStyle->SingleColorIcon(":/icons/remove"));
         ui->sendButton->setIcon(_platformStyle->SingleColorIcon(":/icons/send"));
+        */
+        ui->addButton->setIcon(QIcon(":/icons/" + theme + "/add"));
+        ui->clearButton->setIcon(QIcon(":/icons/" + theme + "/remove"));
+        ui->sendButton->setIcon(QIcon(":/icons/" + theme + "/send"));
+        // VELES END
     }
 
     GUIUtil::setupAddressWidget(ui->lineEditCoinControlChange, this);
@@ -851,7 +862,7 @@ void SendCoinsDialog::coinControlChangeEdited(const QString& text)
         }
         else if (!IsValidDestination(dest)) // Invalid address
         {
-            ui->labelCoinControlChangeLabel->setText(tr("Warning: Invalid FxTCoin address"));
+            ui->labelCoinControlChangeLabel->setText(tr("Warning: Invalid Veles address"));
         }
         else // Valid address
         {

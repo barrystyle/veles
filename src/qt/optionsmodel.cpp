@@ -84,6 +84,11 @@ void OptionsModel::Init(bool resetSettings)
         settings.setValue("strThirdPartyTxUrls", "");
     strThirdPartyTxUrls = settings.value("strThirdPartyTxUrls", "").toString();
 
+    // VELES BEGIN
+    if (!settings.contains("theme"))
+        settings.setValue("theme", "");
+    // VELES END
+
     if (!settings.contains("fCoinControlFeatures"))
         settings.setValue("fCoinControlFeatures", false);
     fCoinControlFeatures = settings.value("fCoinControlFeatures", false).toBool();
@@ -307,6 +312,10 @@ QVariant OptionsModel::data(const QModelIndex & index, int role) const
             return nDisplayUnit;
         case ThirdPartyTxUrls:
             return strThirdPartyTxUrls;
+        // VELES BEGIN
+        case Theme:
+            return settings.value("theme");
+        // VELES END
         case Language:
             return settings.value("language");
         case CoinControlFeatures:
@@ -436,6 +445,14 @@ bool OptionsModel::setData(const QModelIndex & index, const QVariant & value, in
                 setRestartRequired(true);
             }
             break;
+        // VELES BEGIN
+        case Theme:
+           if (settings.value("theme") != value) {
+               settings.setValue("theme", value);
+               setRestartRequired(true);
+           }
+           break;
+        // VELES END
         case Language:
             if (settings.value("language") != value) {
                 settings.setValue("language", value);

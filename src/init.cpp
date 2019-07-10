@@ -81,6 +81,9 @@
 // Pivx
 #include <sporkdb.h>
 //
+// VELES BEGIN
+#include <veleslogo.h>
+// VELES END
 
 #ifndef WIN32
 #include <attributes.h>
@@ -131,7 +134,7 @@ static const char* FEE_ESTIMATES_FILENAME="fee_estimates.dat";
 /**
  * The PID file facilities.
  */
-static const char* BITCOIN_PID_FILENAME = "fxtcd.pid";
+static const char* BITCOIN_PID_FILENAME = "velesd.pid";
 
 static fs::path GetPidFile()
 {
@@ -182,7 +185,7 @@ NODISCARD static bool CreatePidFile()
 /**
  * This is a minimally invasive approach to shutdown on LevelDB read errors from the
  * chainstate, while keeping user interface out of the common library, which is shared
- * between fxtcoind, and fxtcoin-qt and non-server tools.
+ * between velesd, and veles-qt and non-server tools.
 */
 class CCoinsViewErrorCatcher final : public CCoinsViewBacked
 {
@@ -237,7 +240,7 @@ void Shutdown(InitInterfaces& interfaces)
     /// for example if the data directory was found to be locked.
     /// Be sure that anything that writes files or flushes caches only does this if the respective
     /// module was initialized.
-    RenameThread("fxtc-shutoff");
+    RenameThread("veles-shutoff");
     mempool.AddTransactionsUpdated(1);
 
     StopHTTPRPC();
@@ -426,7 +429,10 @@ void SetupServerArgs()
         "-dbcrashratio", "-forcecompactdb",
         // GUI args. These will be overwritten by SetupUIArgs for the GUI
         "-allowselfsignedrootcertificates", "-choosedatadir", "-lang=<lang>", "-min", "-resetguisettings", "-rootcertificates=<file>", "-splash", "-uiplatform"};
-
+        // VELES BEGIN
+        // GUI args
+        "-loadcss", "-dumpcss";
+        // VELES END
     gArgs.AddArg("-version", "Print version and exit", false, OptionsCategory::OPTIONS);
     gArgs.AddArg("-alertnotify=<cmd>", "Execute command when a relevant alert is received or we see a really long fork (%s in cmd is replaced by message)", false, OptionsCategory::OPTIONS);
     gArgs.AddArg("-assumevalid=<hex>", strprintf("If this block is in the chain assume that it and its ancestors are valid and potentially skip their script verification (0 to verify all, default: %s, testnet: %s)", defaultChainParams->GetConsensus().defaultAssumeValid.GetHex(), testnetChainParams->GetConsensus().defaultAssumeValid.GetHex()), false, OptionsCategory::OPTIONS);
@@ -582,7 +588,10 @@ void SetupServerArgs()
     gArgs.AddArg("-blockmaxweight=<n>", strprintf("Set maximum BIP141 block weight (default: %d)", DEFAULT_BLOCK_MAX_WEIGHT), false, OptionsCategory::BLOCK_CREATION);
     gArgs.AddArg("-blockmintxfee=<amt>", strprintf("Set lowest fee rate (in %s/kB) for transactions to be included in block creation. (default: %s)", CURRENCY_UNIT, FormatMoney(DEFAULT_BLOCK_MIN_TX_FEE)), false, OptionsCategory::BLOCK_CREATION);
     gArgs.AddArg("-blockversion=<n>", "Override block version to test forking scenarios", true, OptionsCategory::BLOCK_CREATION);
-    gArgs.AddArg("-algo=<algo>", strprintf("Mining algorithm: sha256d, scrypt, lyra2z, x11, x16r (default: sha256d)"), false, OptionsCategory::BLOCK_CREATION);
+    // VELES BEGIN
+    //gArgs.AddArg("-algo=<algo>", strprintf("Mining algorithm: sha256d, scrypt, lyra2z, x11, x16r (default: sha256)"), false, OptionsCategory::BLOCK_CREATION);
+    gArgs.AddArg("-algo=<algo>", strprintf("Mining algorithm: sha256d, scrypt, lyra2z, x11, x16r (default: scrypt)"), false, OptionsCategory::BLOCK_CREATION);
+    // VELES END
 
     gArgs.AddArg("-rest", strprintf("Accept public REST requests (default: %u)", DEFAULT_REST_ENABLE), false, OptionsCategory::RPC);
     gArgs.AddArg("-rpcallowip=<ip>", "Allow JSON-RPC connections from specified source. Valid for <ip> are a single IP (e.g. 1.2.3.4), a network/netmask (e.g. 1.2.3.4/255.255.255.0) or a network/CIDR (e.g. 1.2.3.4/24). This option can be specified multiple times", false, OptionsCategory::RPC);
@@ -619,8 +628,8 @@ void SetupServerArgs()
 
 std::string LicenseInfo()
 {
-    const std::string URL_SOURCE_CODE = "<https://github.com/fxtc/fxtc>";
-    const std::string URL_WEBSITE = "<https://fixedtradecoin.org>";
+    const std::string URL_SOURCE_CODE = "<https://github.com/velescore/veles>";
+    const std::string URL_WEBSITE = "<https://veles.network>";
 
     // FXTC BEGIN
     //return CopyrightHolders(strprintf(_("Copyright (C) %i-%i"), 2009, COPYRIGHT_YEAR) + " ") + "\n" +
@@ -728,7 +737,7 @@ static void CleanupBlockRevFiles()
 static void ThreadImport(std::vector<fs::path> vImportFiles)
 {
     const CChainParams& chainparams = Params();
-    RenameThread("fxtc-loadblk");
+    RenameThread("veles-loadblk");
     ScheduleBatchPriority();
 
     {
@@ -801,7 +810,7 @@ static void ThreadImport(std::vector<fs::path> vImportFiles)
 }
 
 /** Sanity checks
- *  Ensure that FxTCoin is running in a usable environment with all
+ *  Ensure that Veles is running in a usable environment with all
  *  necessary library support.
  */
 static bool InitSanityCheck()
@@ -948,6 +957,14 @@ void InitLogging()
 #endif
     LogPrintf(PACKAGE_NAME " version %s\n", version_string);
 }
+
+// VELES BEGIN
+void DisplayBootLogo()
+{
+    if (LogInstance().m_print_to_console)
+        fprintf(stdout, "%s\n", strVelesCoreLogoAscii.c_str());
+}
+// VELES END
 
 namespace { // Variables internal to initialization process only
 
@@ -1243,7 +1260,10 @@ bool AppInitParameterInteraction()
 
     // FXTC BEGIN
     // algo switch
-    std::string strAlgo = gArgs.GetArg("-algo","sha256d");
+    // VELES BEGIN
+    //std::string strAlgo = gArgs.GetArg("-algo","sha256");
+    std::string strAlgo = gArgs.GetArg("-algo","scrypt");
+    // VELES END
     transform(strAlgo.begin(), strAlgo.end(), strAlgo.begin(), ::tolower);
     if (strAlgo == "sha256d")
          miningAlgo = ALGO_SHA256D;
@@ -1266,7 +1286,7 @@ bool AppInitParameterInteraction()
 
 static bool LockDataDirectory(bool probeOnly)
 {
-    // Make sure only a single FxTCoin process is using the data directory.
+    // Make sure only a single Veles process is using the data directory.
     fs::path datadir = GetDataDir();
     if (!DirIsWritable(datadir)) {
         return InitError(strprintf(_("Cannot write to data directory '%s'; check permissions."), datadir.string()));
@@ -1352,9 +1372,9 @@ bool AppInitMain(InitInterfaces& interfaces)
     // Warn about relative -datadir path.
     if (gArgs.IsArgSet("-datadir") && !fs::path(gArgs.GetArg("-datadir", "")).is_absolute()) {
         LogPrintf("Warning: relative datadir option '%s' specified, which will be interpreted relative to the " /* Continued */
-                  "current working directory '%s'. This is fragile, because if fxtcoin is started in the future "
+                  "current working directory '%s'. This is fragile, because if veles is started in the future "
                   "from a different location, it will be unable to locate the current data files. There could "
-                  "also be data loss if fxtcoin is started while in a temporary directory.\n",
+                  "also be data loss if veles is started while in a temporary directory.\n",
             gArgs.GetArg("-datadir", ""), fs::current_path().string());
     }
 
