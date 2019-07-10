@@ -1,5 +1,7 @@
 Veles Core version 0.18.0 "Blockchain Barracuda" is now available from:
 
+Download: <https://www.veles.network/download.en.html>
+
 This is a new major version release, including new features, various bug
 fixes and performance improvements, as well as updated translations.
 
@@ -574,4 +576,4 @@ Bitcoin Core contributors
 - Wladimir J. van der Laan
 - Zain Iqbal Allarakhia
 
-The Bitcoin core release notes https://github.com/bitcoin/bitcoin/edit/master/doc/release-notes/release-notes-0.18.0.md
+The Bitcoin core release notes <https://github.com/bitcoin/bitcoin/edit/master/doc/release-notes/release-notes-0.18.0.md>
