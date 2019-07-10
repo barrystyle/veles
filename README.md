@@ -1,7 +1,7 @@
 Veles Core integration/staging tree
 ==================================
 
-[![Build Status](https://travis-ci.org/veles/veles.svg?branch=0.18)](https://travis-ci.org/veles/veles)
+[![Build Status](https://travis-ci.org/veles/veles.svg?branch=0.18)](https://travis-ci.org/velescore/veles)
 
 https://veles.network
 
@@ -41,7 +41,7 @@ Build
     Configure and build the headless Veles Core binaries as well as the GUI (if Qt is found).
 
     You can disable the GUI build by passing `--without-gui` to configure.
-        
+
         ./autogen.sh
         ./configure
         make

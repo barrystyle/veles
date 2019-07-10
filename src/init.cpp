@@ -628,8 +628,8 @@ void SetupServerArgs()
 
 std::string LicenseInfo()
 {
-    const std::string URL_SOURCE_CODE = "<https://github.com/veles/veles>";
-    const std::string URL_WEBSITE = "<https://fixedtradecoin.org>";
+    const std::string URL_SOURCE_CODE = "<https://github.com/velescore/veles>";
+    const std::string URL_WEBSITE = "<https://veles.network>";
 
     // FXTC BEGIN
     //return CopyrightHolders(strprintf(_("Copyright (C) %i-%i"), 2009, COPYRIGHT_YEAR) + " ") + "\n" +
