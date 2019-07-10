@@ -40,7 +40,7 @@ QToolBar > QToolButton:hover {
 
 QToolBar > QToolButton:checked {
 	background-color: transparent;
-	color: #333;
+	color: #ddd;
 	font-weight:bold;
 	border-top: 3px solid #eea236;
 }
