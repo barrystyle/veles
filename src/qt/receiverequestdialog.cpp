@@ -215,12 +215,12 @@ void ReceiveRequestDialog::on_btnCopyAddress_clicked()
 
 void ReceiveRequestDialog::on_btnCoinRequest_clicked()
 {
-    std::string creq = "https://coinrequest.io/create?coin=genesisnetwork&address=";
+    std::string creq = "https://coinrequest.io/create?coin=veles&address=";
 
     QString cruri;
     cruri += GUIUtil::HtmlEscape(info.address);
     if (info.amount)
-        cruri += ("&amount=") + GenesisUnits::format(model->getDisplayUnit(), info.amount);
+        cruri += ("&amount=") + BitcoinUnits::format(model->getOptionsModel()->getDisplayUnit(), info.amount);
     if (!info.message.isEmpty())
         cruri += ("&message=") + GUIUtil::HtmlEscape(info.message);
 
