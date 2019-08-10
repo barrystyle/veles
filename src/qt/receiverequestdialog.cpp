@@ -215,7 +215,7 @@ void ReceiveRequestDialog::on_btnCopyAddress_clicked()
 
 void ReceiveRequestDialog::on_btnCoinRequest_clicked()
 {
-    std::string creq = "https://coinrequest.io/create?coin=veles&address=";
+    std::string creq = "https://coinrequest.io/create?coin=veles&wallet=veles&address=";
 
     QString cruri;
     cruri += GUIUtil::HtmlEscape(info.address);
