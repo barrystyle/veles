@@ -204,12 +204,13 @@ public:
                 { 10000, uint256S("0xab14a2cb0b305dcc26b2da9af35e0b0db5e19969746667d91a90983a972d1468")},
                 { 50000, uint256S("0xf335e1deda524c14026d473467753b365f572eecd0221ad72b6a29b53ebe163a")},
                 {100000, uint256S("0x000000000000005f9df7c4a29b7fc8ba96ca5f49a1122b7dce6fc0f311085bec")},
-                {167000, uint256S("0x22f677b269906cf135975d5f3b995f50614064d7f10782c590eb35193c80753c")}
+                {167000, uint256S("0x22f677b269906cf135975d5f3b995f50614064d7f10782c590eb35193c80753c")},
+		{196000, uint256S("0x8ee72b4d92ea131e973f1f0cc5ce5e0170683a41a2a10e7c7d2003122d06ad66")}    
 
             }
         };
         // FXTC BEGIN
-        consensus.nlastValidPowHashHeight = 100;
+        consensus.nlastValidPowHashHeight = 196000;
         // FXTC
 
         chainTxData = ChainTxData{
