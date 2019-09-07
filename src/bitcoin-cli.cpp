@@ -109,7 +109,11 @@ static int AppInitRPC(int argc, char* argv[])
         return EXIT_FAILURE;
     }
     if (argc < 2 || HelpRequested(gArgs) || gArgs.IsArgSet("-version")) {
-        std::string strUsage = PACKAGE_NAME " RPC client version " + FormatFullVersion() + "\n";
+        //std::string strUsage = PACKAGE_NAME " RPC client version " + FormatFullVersion() + "\n";
+        // VELES BEGIN
+        std::string strUsage = PACKAGE_NAME " RPC client version " + FormatFullVersion() + 
+            " \"" + CLIENT_VERSION_CODENAME + "\"\n" + strVelesCoreLogoAscii + "\n";
+        // VELES END
         if (!gArgs.IsArgSet("-version")) {
             strUsage += "\n"
                 "Usage:  veles-cli [options] <command> [params]  Send command to " PACKAGE_NAME "\n"
