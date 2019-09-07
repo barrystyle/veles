@@ -143,7 +143,7 @@ static bool AppInit(int argc, char* argv[])
         // Set this early so that parameter interactions go to console
         InitLogging();
         // VELES BEGIN
-        //DisplayBootLogo();
+        DisplayBootLogo();
         // VELES END
         InitParameterInteraction();
         if (!AppInitBasicSetup())

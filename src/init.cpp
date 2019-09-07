@@ -961,8 +961,7 @@ void InitLogging()
 // VELES BEGIN
 void DisplayBootLogo()
 {
-    if (LogInstance().m_print_to_console)
-        fprintf(stdout, "%s\n", strVelesCoreLogoAscii.c_str());
+    LogPrintf("\n%s\n", strVelesCoreLogoAscii);
 }
 // VELES END
 
