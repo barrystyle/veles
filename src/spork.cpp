@@ -50,7 +50,7 @@ void CSporkManager::LoadSporksFromDB()
         // attempt to read spork from sporkDB
         CSporkMessage spork;
         if (!pSporkDB->ReadSpork(i, spork)) {
-            LogPrintf("%s : no previous value for %s found in database\n", __func__, strSpork);
+            //LogPrintf("%s : no previous value for %s found in database\n", __func__, strSpork);
             continue;
         }
 
