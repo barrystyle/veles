@@ -342,7 +342,7 @@ static UniValue gethalvingstatus(const JSONRPCRequest& request)
 
     if (request.fHelp || request.params.size() != 0)    // || (strMode != "basic" && strMode != "full" && strMode != "dev"))
         throw std::runtime_error(
-            "gethalvingstatus                   *** NEW: Experimental ***\n"    // ( \"mode\" )
+            "gethalvingstatus\n"    // ( \"mode\" )
             "\nReturns a json object containing an information related to block reward halving. A halving epoch is time between\n"
             "the start and end of block subsidy halving interval, where maximum block reward is the same for all the blocks\n"
             "within the epoch. If not enough coins are mined during the epoch, the halving will not occur and the current epoch\n"
@@ -481,7 +481,6 @@ static UniValue getmultialgostatus(const JSONRPCRequest& request)
     if (request.fHelp || request.params.size() != 0)
         throw std::runtime_error(
             RPCHelpMan{"getmultialgostatus",
-            //"\n*** Experimental: Use at your own risk, might be a subject to change any time. ***\n"
             "\nReturns a json object containing information related to multi-algo mining.",
             {},
             RPCResult{
