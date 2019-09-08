@@ -1054,10 +1054,10 @@ UniValue getsuperblockbudget(const JSONRPCRequest& request)
 static const CRPCCommand commands[] =
 { //  category              name                      actor (function)         argNames
   //  --------------------- ------------------------  -----------------------  ----------
-    { "dash",               "gobject",                &gobject,                {"command"}  },
-    { "dash",               "getgovernanceinfo",      &getgovernanceinfo,      {}  },
-    { "dash",               "getsuperblockbudget",    &getsuperblockbudget,    {"index"}  },
-    { "dash",               "voteraw",                &voteraw,                {"masternode-tx-hash", "masternode-tx-index", "governance-hash", "vote-signal", "yes-no-abstain", "time", "vote-sig"}  },
+    { "governance",         "gobject",                &gobject,                {"command"}  },
+    { "governance",         "getgovernanceinfo",      &getgovernanceinfo,      {}  },
+    { "governance",         "getsuperblockbudget",    &getsuperblockbudget,    {"index"}  },
+    { "governance",         "voteraw",                &voteraw,                {"masternode-tx-hash", "masternode-tx-index", "governance-hash", "vote-signal", "yes-no-abstain", "time", "vote-sig"}  },
 };
 
 void RegisterDashGovernanceRPCCommands(CRPCTable &t)

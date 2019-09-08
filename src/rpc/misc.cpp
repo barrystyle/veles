@@ -789,10 +789,9 @@ static const CRPCCommand commands[] =
     { "hidden",             "echojson",               &echo,                   {"arg0","arg1","arg2","arg3","arg4","arg5","arg6","arg7","arg8","arg9"}},
 
     // Dash
-    // Veles Core: Category renamed from Dash to Masternodes
-    { "masternodes",        "mnsync",                 &mnsync,                 {"status-next-reset"}  },
-    // Doesn't fit into the mn category
-    { "dash",               "spork",                  &spork,                  {"name", "value"}  },
+    // Veles Core: Reorged category names
+    { "masternode",        "mnsync",                 &mnsync,                 {"status-next-reset"}  },
+    { "governance",        "spork",                  &spork,                  {"name", "value"}  },
     //
 };
 // clang-format on
