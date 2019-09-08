@@ -957,11 +957,12 @@ UniValue sentinelping(const JSONRPCRequest& request)
 static const CRPCCommand commands[] =
 { //  category              name                      actor (function)         argNames
   //  --------------------- ------------------------  -----------------------  ----------
-    { "dash",               "masternode",             &masternode,             {"command"}  },
-    { "dash",               "masternodelist",         &masternodelist,         {"mode", "filter"}  },
-    { "dash",               "masternodebroadcast",    &masternodebroadcast,    {"command"}  },
-    { "dash",               "getpoolinfo",            &getpoolinfo,            {}  },
-    { "dash",               "sentinelping",           &sentinelping,           {"version"}  },
+  //  Veles Core: Category renamed from Dash to Masternode
+    { "masternode",         "masternode",             &masternode,             {"command"}  },
+    { "masternode",         "masternodelist",         &masternodelist,         {"mode", "filter"}  },
+    { "masternode",         "masternodebroadcast",    &masternodebroadcast,    {"command"}  },
+    { "masternode",         "getpoolinfo",            &getpoolinfo,            {}  },
+    { "masternode",         "sentinelping",           &sentinelping,           {"version"}  },
 #ifdef ENABLE_WALLET
 // FXTC TODO:    { "dash",               "privatesend",            &privatesend,            {"command"}  },
 #endif
