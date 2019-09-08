@@ -701,7 +701,15 @@ static UniValue getblocktemplate(const JSONRPCRequest& request)
                     HelpExampleCli("getblocktemplate", "{\"rules\": [\"segwit\"]}")
             + HelpExampleRpc("getblocktemplate", "{\"rules\": [\"segwit\"]}")
                 },
-            }.ToString());
+            }.ToString()
+        // VELES BEGIN
+            + ((gArgs.GetBoolArg("-rpcbackcompatible", DEFAULT_RPC_BACK_COMPATIBLE))
+                ? "\nNotice: RPC backward compatibility is enabled and this method will return a result even without the required argument, "
+                  "which was optional in the previous version. It will assume the default value of {\"rules\": [\"segwit\"]}. To enforce "
+                  "strict checking of syntax described above, use -rpcbackcompatible=0\n"
+                : "")
+        // VELES END
+        );
 
     LOCK(cs_main);
 
@@ -845,7 +853,13 @@ static UniValue getblocktemplate(const JSONRPCRequest& request)
     const struct VBDeploymentInfo& segwit_info = VersionBitsDeploymentInfo[Consensus::DEPLOYMENT_SEGWIT];
     // GBT must be called with 'segwit' set in the rules
     if (setClientRules.count(segwit_info.name) != 1) {
-        throw JSONRPCError(RPC_INVALID_PARAMETER, "getblocktemplate must be called with the segwit rule set (call with {\"rules\": [\"segwit\"]})");
+        // VELES BEGIN
+        // Backwards compatibility with 0.17 where the rule parameter is optional
+        if (gArgs.GetBoolArg("-rpcbackcompatible", DEFAULT_RPC_BACK_COMPATIBLE))
+            setClientRules.insert("segwit");
+        else
+        // VELES END
+            throw JSONRPCError(RPC_INVALID_PARAMETER, "getblocktemplate must be called with the segwit rule set (call with {\"rules\": [\"segwit\"]})");
     }
 
     // Update block

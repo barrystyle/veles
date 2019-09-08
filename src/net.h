@@ -92,6 +92,10 @@ static const bool DEFAULT_FORCEDNSSEED = false;
 static const size_t DEFAULT_MAXRECEIVEBUFFER = 5 * 1000;
 static const size_t DEFAULT_MAXSENDBUFFER    = 1 * 1000;
 
+// VELES BEGIN
+static const bool DEFAULT_RPC_BACK_COMPATIBLE = true;
+// VELES END
+
 typedef int64_t NodeId;
 
 struct AddedNodeInfo
