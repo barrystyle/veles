@@ -320,7 +320,7 @@ Graphical User Interface (GUI)
 ------------------------------
 
 - In Settings -> Options -> Display is available button for multiple
-  user interface themes. There are 4 options Bitcoin, Veles, Dark, Light.
+  user interface themes. There are 4 options Veles, Veles, Dark, Light.
 
 - A new Window menu is added alongside the existing File, Settings, and
   Help menus.  Several items from the other menus that opened new
@@ -420,8 +420,8 @@ Wallet
 
 - A sub-project of Veles Core now provides Hardware Wallet Interaction
   (HWI) scripts that allow command-line users to use several popular
-  hardware key management devices with Bitcoin Core.  See their [project
-  page](https://github.com/bitcoin-core/HWI#readme) for details.
+  hardware key management devices with Veles Core.  See their [project
+  page](https://github.com/veles-core/HWI#readme) for details.
 
 Security
 --------
@@ -455,7 +455,7 @@ Veles Core contributors
 - AltcoinBaggins
 - Mdfkbtc
 
-Bitcoin Core contributors
+Veles Core contributors
 - 1Il1
 - 251
 - Aaron Clauson
@@ -477,7 +477,7 @@ Bitcoin Core contributors
 - Ben Carman
 - Ben Woosley
 - benthecarman
-- bitcoinhodler
+- veleshodler
 - Carl Dong
 - Chakib Benziane
 - Chris Moore
@@ -576,4 +576,4 @@ Bitcoin Core contributors
 - Wladimir J. van der Laan
 - Zain Iqbal Allarakhia
 
-The Bitcoin core release notes <https://github.com/bitcoin/bitcoin/edit/master/doc/release-notes/release-notes-0.18.0.md>
+The Veles core release notes <https://github.com/velescore/veles/edit/master/doc/release-notes/release-notes-0.18.0.md>
