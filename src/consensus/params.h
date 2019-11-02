@@ -72,9 +72,7 @@ struct Params {
     int nMasternodePaymentsStartBlock;
     //int nMasternodePaymentsIncreaseBlock;
     int nMasternodePaymentsIncreasePeriod; // in blocks
-    int nMasternodeCollateralMinimum; // in coins
-    int nMasternodeCollateralMaximum; // in coins
-    int nMasternodeCollateral201908;  // in coins
+    int nMasternodeCollateral;  // in coins
     // VELES BEGIN
     int nMasternodePaymentsStartPercent;
     int nMasternodePaymentsFinalPercent;
