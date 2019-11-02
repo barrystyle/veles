@@ -137,21 +137,12 @@ CMasternode::CollateralStatus CMasternode::CheckCollateral(const COutPoint& outp
 // VELES BEGIN
 bool CMasternode::CollateralValueCheck(int nHeight, CAmount TxValue)
 {
-    if (TxValue == CollateralValue(nHeight))
-        return true;
-
-    if (nHeight >= 240000)
-        return false;
-
-    CAmount MinCollateral = Params().GetConsensus().nMasternodeCollateralMinimum * COIN;
-    CAmount MaxCollateral = Params().GetConsensus().nMasternodeCollateralMaximum * COIN;
-
-    return (TxValue >= MinCollateral && TxValue <= MaxCollateral);
+    return (TxValue == CollateralValue(nHeight));
 }
 
 CAmount CMasternode::CollateralValue(int nHeight)
 {
-    return Params().GetConsensus().nMasternodeCollateral201908 * COIN;
+    return Params().GetConsensus().nMasternodeCollateral * COIN;
 }
 // VELES END
 

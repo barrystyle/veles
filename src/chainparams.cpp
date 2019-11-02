@@ -80,9 +80,7 @@ public:
 	      consensus.nMasternodePaymentsStartBlock = 50;
         //consensus.nMasternodePaymentsIncreaseBlock = 50;
         consensus.nMasternodePaymentsIncreasePeriod = 365 * 576 * 5; // 5 years, activated with VCIP01
-        consensus.nMasternodeCollateralMinimum = 2000; // starting MN collateral
-        consensus.nMasternodeCollateralMaximum = 2000; // MN collateral at infinity
-        consensus.nMasternodeCollateral201908  = 500; // MN collateral
+        consensus.nMasternodeCollateral = 500; // MN collateral
         // VELES BEGIN
         consensus.nMasternodePaymentsStartPercent =  5;     // at VCIP01 this should equal to approx same VLS amount as before
         consensus.nMasternodePaymentsFinalPercent =  60;    // will be reached in ca 5 years
@@ -245,9 +243,7 @@ public:
         consensus.nMasternodePaymentsStartBlock = 10; // not true, but it's ok as long as it's less then nMasternodePaymentsIncreaseBlock
         //consensus.nMasternodePaymentsIncreaseBlock = 10;
         consensus.nMasternodePaymentsIncreasePeriod = 25;
-        consensus.nMasternodeCollateralMinimum = 10; // starting MN collateral
-        consensus.nMasternodeCollateralMaximum = 1000; // MN collateral at infinity
-        consensus.nMasternodeCollateral201908  = 500; // MN collateral
+        consensus.nMasternodeCollateral = 500; // MN collateral
         // VELES BEGIN
          consensus.nMasternodePaymentsStartPercent =  5;
          consensus.nMasternodePaymentsFinalPercent =  60; // will be reached in ca 5 yrs
@@ -394,9 +390,7 @@ public:
 	      consensus.nMasternodePaymentsStartBlock = 240;
         //consensus.nMasternodePaymentsIncreaseBlock = 350;
         consensus.nMasternodePaymentsIncreasePeriod = 10;
-        consensus.nMasternodeCollateralMinimum = 1; // starting MN collateral
-        consensus.nMasternodeCollateralMaximum = 100; // MN collateral at infinity
-        consensus.nMasternodeCollateral201908  = 500; // MN collateral
+        consensus.nMasternodeCollateral = 500; // MN collateral
         // VELES BEGIN
         consensus.nMasternodePaymentsStartPercent =  5;
         consensus.nMasternodePaymentsFinalPercent =  60; // will be reached in ca 5 yrs
