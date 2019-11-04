@@ -161,9 +161,16 @@ public:
         // This is fine at runtime as we'll fall back to using them as a oneshot if they don't support the
         // service bits we want, but we should get them updated to support all service bits wanted by any
         // release ASAP to avoid it where possible.
-        vSeeds.emplace_back("explorer.veles.network");
-        vSeeds.emplace_back("veles.network");
-	      vSeeds.emplace_back("80.211.97.48");
+        vSeeds.emplace_back("seed.veles.network");
+        vSeeds.emplace_back("seed1.veles.network");
+	    vSeeds.emplace_back("seed2.veles.network");
+        vSeeds.emplace_back("seed3.veles.network");
+        vSeeds.emplace_back("seed4.veles.network");
+        vSeeds.emplace_back("seed5.veles.network");
+        vSeeds.emplace_back("seed6.veles.network");
+        vSeeds.emplace_back("seed7.veles.network");
+        vSeeds.emplace_back("seed8.veles.network");
+        vSeeds.emplace_back("seed9.veles.network");
         //vSeeds.emplace_back("seeds.on.another.domain"); // dns seeds template
 
         // VELES prefix 'V'
